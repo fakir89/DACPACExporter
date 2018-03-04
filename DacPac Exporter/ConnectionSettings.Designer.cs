@@ -48,7 +48,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerNameTextBox.Location = new System.Drawing.Point(238, 79);
             this.ServerNameTextBox.Name = "ServerNameTextBox";
-            this.ServerNameTextBox.Size = new System.Drawing.Size(216, 22);
+            this.ServerNameTextBox.Size = new System.Drawing.Size(215, 22);
             this.ServerNameTextBox.TabIndex = 0;
             // 
             // ServerNameLabel
@@ -60,7 +60,6 @@
             this.ServerNameLabel.Size = new System.Drawing.Size(114, 19);
             this.ServerNameLabel.TabIndex = 1;
             this.ServerNameLabel.Text = "Server Name:";
-            this.ServerNameLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // UserNameLabel
             // 
@@ -72,7 +71,6 @@
             this.UserNameLabel.TabIndex = 3;
             this.UserNameLabel.Text = "User Name:";
             this.UserNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.UserNameLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // UserNameTextBox
             // 
@@ -81,7 +79,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserNameTextBox.Location = new System.Drawing.Point(238, 144);
             this.UserNameTextBox.Name = "UserNameTextBox";
-            this.UserNameTextBox.Size = new System.Drawing.Size(216, 22);
+            this.UserNameTextBox.Size = new System.Drawing.Size(215, 22);
             this.UserNameTextBox.TabIndex = 2;
             // 
             // AuthentificationTypeComboBox
@@ -95,9 +93,8 @@
             "Windows Authentification"});
             this.AuthentificationTypeComboBox.Location = new System.Drawing.Point(238, 109);
             this.AuthentificationTypeComboBox.Name = "AuthentificationTypeComboBox";
-            this.AuthentificationTypeComboBox.Size = new System.Drawing.Size(216, 24);
+            this.AuthentificationTypeComboBox.Size = new System.Drawing.Size(215, 24);
             this.AuthentificationTypeComboBox.TabIndex = 4;
-            this.AuthentificationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // AuthentificationTypeLabel
             // 
@@ -127,7 +124,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.Location = new System.Drawing.Point(238, 172);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(216, 22);
+            this.PasswordTextBox.Size = new System.Drawing.Size(215, 22);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
@@ -150,13 +147,13 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Connection Settings";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // ConnectionSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(479, 289);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(478, 299);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.PasswordLabel);
@@ -170,8 +167,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConnectionSettingsForm";
-            this.Text = "DacPack Exporter";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "DACPAC Exporter";
+            this.Load += new System.EventHandler(this.ConnectionSettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
