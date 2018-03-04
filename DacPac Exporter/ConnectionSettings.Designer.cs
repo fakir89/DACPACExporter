@@ -48,8 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerNameTextBox.Location = new System.Drawing.Point(238, 79);
             this.ServerNameTextBox.Name = "ServerNameTextBox";
-            this.ServerNameTextBox.Size = new System.Drawing.Size(215, 22);
+            this.ServerNameTextBox.Size = new System.Drawing.Size(219, 22);
             this.ServerNameTextBox.TabIndex = 0;
+            this.ServerNameTextBox.TextChanged += new System.EventHandler(this.ServerNameTextBox_TextChanged);
             // 
             // ServerNameLabel
             // 
@@ -79,22 +80,25 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserNameTextBox.Location = new System.Drawing.Point(238, 144);
             this.UserNameTextBox.Name = "UserNameTextBox";
-            this.UserNameTextBox.Size = new System.Drawing.Size(215, 22);
+            this.UserNameTextBox.Size = new System.Drawing.Size(219, 22);
             this.UserNameTextBox.TabIndex = 2;
+            this.UserNameTextBox.TextChanged += new System.EventHandler(this.UserNameTextBox_TextChanged);
             // 
             // AuthentificationTypeComboBox
             // 
             this.AuthentificationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.AuthentificationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AuthentificationTypeComboBox.FormattingEnabled = true;
             this.AuthentificationTypeComboBox.Items.AddRange(new object[] {
             "SQL Server Authentification",
             "Windows Authentification"});
             this.AuthentificationTypeComboBox.Location = new System.Drawing.Point(238, 109);
             this.AuthentificationTypeComboBox.Name = "AuthentificationTypeComboBox";
-            this.AuthentificationTypeComboBox.Size = new System.Drawing.Size(215, 24);
+            this.AuthentificationTypeComboBox.Size = new System.Drawing.Size(219, 24);
             this.AuthentificationTypeComboBox.TabIndex = 4;
+            this.AuthentificationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.AuthentificationTypeComboBox_SelectedIndexChanged);
             // 
             // AuthentificationTypeLabel
             // 
@@ -124,9 +128,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.Location = new System.Drawing.Point(238, 172);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(215, 22);
+            this.PasswordTextBox.Size = new System.Drawing.Size(219, 22);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.UseSystemPasswordChar = true;
+            this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // ConnectButton
             // 
@@ -137,6 +142,7 @@
             this.ConnectButton.TabIndex = 8;
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
+            this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
             // label1
             // 
@@ -153,7 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(478, 299);
+            this.ClientSize = new System.Drawing.Size(482, 303);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.PasswordLabel);
@@ -164,7 +170,7 @@
             this.Controls.Add(this.UserNameTextBox);
             this.Controls.Add(this.ServerNameLabel);
             this.Controls.Add(this.ServerNameTextBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConnectionSettingsForm";
             this.Text = "DACPAC Exporter";
@@ -187,5 +193,6 @@
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Label label1;
     }
+
 }
 
