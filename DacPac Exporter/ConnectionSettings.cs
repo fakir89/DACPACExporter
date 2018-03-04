@@ -13,7 +13,6 @@ namespace DacPac_Exporter
 {
     public partial class ConnectionSettingsForm : Form
     {
-
         string server;
         string authentificationType;
         string login;
@@ -33,9 +32,9 @@ namespace DacPac_Exporter
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            
+            //debug start
             server = "sup01sql15";
-            
+            //debug end
 
             if (authentificationType == "SQL Server Authentification")
             {
@@ -46,26 +45,26 @@ namespace DacPac_Exporter
                 connectionString = $"Server={server}; Database=master; Trusted_Connection=True;";
             }
 
-            SqlConnection connection = new SqlConnection(connectionString);
-
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                //MessageBox.Show("Подключение прошло успешно!");
-                Hide();
-                DatabaseSelect dataBaseSelectForm = new DatabaseSelect(connection);
-                dataBaseSelectForm.Show();
-            }
 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    connection.Open();
+                    //MessageBox.Show("Подключение прошло успешно!");
+                    Hide();
+                    DatabaseSelect dataBaseSelectForm = new DatabaseSelect(connection);
+                    dataBaseSelectForm.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
-            finally
-            {
-                connection.Close();
-            }
-
         }
 
         private void AuthentificationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)

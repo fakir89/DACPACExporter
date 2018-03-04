@@ -58,6 +58,7 @@
             this.DatabaseSelectExportButton.TabIndex = 2;
             this.DatabaseSelectExportButton.Text = "Export";
             this.DatabaseSelectExportButton.UseVisualStyleBackColor = true;
+            this.DatabaseSelectExportButton.Click += new System.EventHandler(this.DatabaseSelectExportButton_Click);
             // 
             // ChooseDatabasesToExportLabel
             // 
