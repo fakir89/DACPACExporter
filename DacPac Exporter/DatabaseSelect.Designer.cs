@@ -41,7 +41,7 @@
             this.CheckBoxListDatabaseName.FormattingEnabled = true;
             this.CheckBoxListDatabaseName.Location = new System.Drawing.Point(12, 67);
             this.CheckBoxListDatabaseName.Name = "CheckBoxListDatabaseName";
-            this.CheckBoxListDatabaseName.Size = new System.Drawing.Size(458, 613);
+            this.CheckBoxListDatabaseName.Size = new System.Drawing.Size(460, 613);
             this.CheckBoxListDatabaseName.Sorted = true;
             this.CheckBoxListDatabaseName.TabIndex = 1;
             // 
@@ -50,9 +50,12 @@
             this.DatabaseSelectExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DatabaseSelectExportButton.AutoSize = true;
             this.DatabaseSelectExportButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.DatabaseSelectExportButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DatabaseSelectExportButton.Location = new System.Drawing.Point(290, 692);
+            this.DatabaseSelectExportButton.MaximumSize = new System.Drawing.Size(180, 40);
+            this.DatabaseSelectExportButton.MinimumSize = new System.Drawing.Size(180, 40);
             this.DatabaseSelectExportButton.Name = "DatabaseSelectExportButton";
             this.DatabaseSelectExportButton.Size = new System.Drawing.Size(180, 40);
             this.DatabaseSelectExportButton.TabIndex = 2;
@@ -85,9 +88,14 @@
             this.Controls.Add(this.CheckBoxListDatabaseName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(500, 1000);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(500, 800);
             this.Name = "DatabaseSelect";
             this.Text = "DACPAC Exporter";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -172,6 +172,10 @@
             this.Controls.Add(this.ServerNameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(500, 350);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(500, 350);
             this.Name = "ConnectionSettingsForm";
             this.Text = "DACPAC Exporter";
             this.Load += new System.EventHandler(this.ConnectionSettingsForm_Load);
