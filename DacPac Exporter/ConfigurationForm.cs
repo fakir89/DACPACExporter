@@ -28,14 +28,10 @@ namespace DacPac_Exporter
             InitializeComponent();
         }
 
+
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
             
-        }
-
-        private void ChooseDatabasesToExportLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void DatabaseSelectButton_Click(object sender, EventArgs e)

@@ -50,15 +50,11 @@ namespace DacPac_Exporter
             try
             {
                 connection.Open();
-                //MessageBox.Show("Подключение прошло успешно!");
                 Hide();
 
                 ConfigurationForm configurationForm = new ConfigurationForm();
                 configurationForm.connection = connection;
                 configurationForm.Show();
-
-                //DatabaseSelect dataBaseSelectForm = new DatabaseSelect(connection);
-                //dataBaseSelectForm.Show();
             }
             catch (Exception ex)
             {

@@ -17,7 +17,6 @@ namespace DacPac_Exporter
         int j = 0;
 
         SqlConnection _connection;
-        ConfigurationForm f2;
 
         public SqlConnection connection
         {
@@ -28,10 +27,9 @@ namespace DacPac_Exporter
         }
 
 
-        public DatabaseSelect(ConfigurationForm f2)
+        public DatabaseSelect()
         {
             InitializeComponent();
-            this.f2 = f2;
         }
 
         private void DatabaseSelect_Load(object sender, EventArgs e)
@@ -43,7 +41,8 @@ namespace DacPac_Exporter
         {
             GetChecked();
             Close();
-            f2.Show();
+            Application.OpenForms[1].Show();    
+
         }
 
         void FillCheckBoxListDatabaseName()
