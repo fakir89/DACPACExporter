@@ -138,7 +138,7 @@
             this.ConnectButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ConnectButton.Location = new System.Drawing.Point(36, 221);
             this.ConnectButton.Name = "ConnectButton";
-            this.ConnectButton.Size = new System.Drawing.Size(418, 35);
+            this.ConnectButton.Size = new System.Drawing.Size(420, 35);
             this.ConnectButton.TabIndex = 8;
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(36, 24);
+            this.label1.Location = new System.Drawing.Point(36, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(418, 35);
+            this.label1.Size = new System.Drawing.Size(421, 35);
             this.label1.TabIndex = 9;
             this.label1.Text = "Connection Settings";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

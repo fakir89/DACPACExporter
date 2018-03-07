@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseSelect));
             this.CheckBoxListDatabaseName = new System.Windows.Forms.CheckedListBox();
-            this.DatabaseSelectExportButton = new System.Windows.Forms.Button();
+            this.DatabaseSelectOKButton = new System.Windows.Forms.Button();
             this.ChooseDatabasesToExportLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -45,23 +45,23 @@
             this.CheckBoxListDatabaseName.Sorted = true;
             this.CheckBoxListDatabaseName.TabIndex = 1;
             // 
-            // DatabaseSelectExportButton
+            // DatabaseSelectOKButton
             // 
-            this.DatabaseSelectExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DatabaseSelectOKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DatabaseSelectExportButton.AutoSize = true;
-            this.DatabaseSelectExportButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.DatabaseSelectExportButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DatabaseSelectExportButton.Location = new System.Drawing.Point(290, 692);
-            this.DatabaseSelectExportButton.MaximumSize = new System.Drawing.Size(180, 40);
-            this.DatabaseSelectExportButton.MinimumSize = new System.Drawing.Size(180, 40);
-            this.DatabaseSelectExportButton.Name = "DatabaseSelectExportButton";
-            this.DatabaseSelectExportButton.Size = new System.Drawing.Size(180, 40);
-            this.DatabaseSelectExportButton.TabIndex = 2;
-            this.DatabaseSelectExportButton.Text = "Export";
-            this.DatabaseSelectExportButton.UseVisualStyleBackColor = true;
-            this.DatabaseSelectExportButton.Click += new System.EventHandler(this.DatabaseSelectExportButton_Click);
+            this.DatabaseSelectOKButton.AutoSize = true;
+            this.DatabaseSelectOKButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.DatabaseSelectOKButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DatabaseSelectOKButton.Location = new System.Drawing.Point(290, 692);
+            this.DatabaseSelectOKButton.MaximumSize = new System.Drawing.Size(180, 35);
+            this.DatabaseSelectOKButton.MinimumSize = new System.Drawing.Size(180, 35);
+            this.DatabaseSelectOKButton.Name = "DatabaseSelectOKButton";
+            this.DatabaseSelectOKButton.Size = new System.Drawing.Size(180, 35);
+            this.DatabaseSelectOKButton.TabIndex = 2;
+            this.DatabaseSelectOKButton.Text = "OK";
+            this.DatabaseSelectOKButton.UseVisualStyleBackColor = true;
+            this.DatabaseSelectOKButton.Click += new System.EventHandler(this.DatabaseSelectOKButton_Click);
             // 
             // ChooseDatabasesToExportLabel
             // 
@@ -69,7 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ChooseDatabasesToExportLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChooseDatabasesToExportLabel.Location = new System.Drawing.Point(12, 18);
+            this.ChooseDatabasesToExportLabel.Location = new System.Drawing.Point(12, 19);
             this.ChooseDatabasesToExportLabel.Name = "ChooseDatabasesToExportLabel";
             this.ChooseDatabasesToExportLabel.Size = new System.Drawing.Size(458, 35);
             this.ChooseDatabasesToExportLabel.TabIndex = 10;
@@ -84,7 +84,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(482, 753);
             this.Controls.Add(this.ChooseDatabasesToExportLabel);
-            this.Controls.Add(this.DatabaseSelectExportButton);
+            this.Controls.Add(this.DatabaseSelectOKButton);
             this.Controls.Add(this.CheckBoxListDatabaseName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -94,6 +94,7 @@
             this.MinimumSize = new System.Drawing.Size(500, 800);
             this.Name = "DatabaseSelect";
             this.Text = "DACPAC Exporter";
+            this.Load += new System.EventHandler(this.DatabaseSelect_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,7 +102,7 @@
 
         #endregion
         private System.Windows.Forms.CheckedListBox CheckBoxListDatabaseName;
-        private System.Windows.Forms.Button DatabaseSelectExportButton;
+        private System.Windows.Forms.Button DatabaseSelectOKButton;
         private System.Windows.Forms.Label ChooseDatabasesToExportLabel;
     }
 }

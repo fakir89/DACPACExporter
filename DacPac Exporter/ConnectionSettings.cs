@@ -13,17 +13,18 @@ namespace DacPac_Exporter
 {
     public partial class ConnectionSettingsForm : Form
     {
+
+        public ConnectionSettingsForm()
+        {
+            InitializeComponent();
+
+        }
+        
         string server;
         string authentificationType;
         string login;
         string password;
         string connectionString;
-
-        public ConnectionSettingsForm()
-        {
-            InitializeComponent();
-          
-        }
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -45,26 +46,29 @@ namespace DacPac_Exporter
                 connectionString = $"Server={server}; Database=master; Trusted_Connection=True;";
             }
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
             {
+                connection.Open();
+                //MessageBox.Show("Подключение прошло успешно!");
+                Hide();
 
-                try
-                {
-                    connection.Open();
-                    //MessageBox.Show("Подключение прошло успешно!");
-                    Hide();
-                    DatabaseSelect dataBaseSelectForm = new DatabaseSelect(connection);
-                    dataBaseSelectForm.Show();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
+                ConfigurationForm configurationForm = new ConfigurationForm();
+                configurationForm.connection = connection;
+                configurationForm.Show();
+
+                //DatabaseSelect dataBaseSelectForm = new DatabaseSelect(connection);
+                //dataBaseSelectForm.Show();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
         }
 
         private void AuthentificationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)

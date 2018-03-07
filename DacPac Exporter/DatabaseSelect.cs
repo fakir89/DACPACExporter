@@ -16,19 +16,43 @@ namespace DacPac_Exporter
         string[] checkedDB = new string[1000];
         int j = 0;
 
-        public DatabaseSelect(SqlConnection connection)
+        SqlConnection _connection;
+        ConfigurationForm f2;
+
+        public SqlConnection connection
         {
-            InitializeComponent();
-            FillCheckBoxListDatabaseName(connection);
-            
+            set
+            {
+                _connection = value;
+            }
         }
 
-        void FillCheckBoxListDatabaseName(SqlConnection connection)
+
+        public DatabaseSelect(ConfigurationForm f2)
+        {
+            InitializeComponent();
+            this.f2 = f2;
+        }
+
+        private void DatabaseSelect_Load(object sender, EventArgs e)
+        {
+            FillCheckBoxListDatabaseName();
+        }
+
+        private void DatabaseSelectOKButton_Click(object sender, EventArgs e)
+        {
+            GetChecked();
+            Close();
+            f2.Show();
+        }
+
+        void FillCheckBoxListDatabaseName()
         {
             string command = "select name as database_name from sys.databases";
-            SqlDataAdapter adapter = new SqlDataAdapter(command, connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
+
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -45,11 +69,6 @@ namespace DacPac_Exporter
                     checkedDB[j++] = CheckBoxListDatabaseName.Items[i].ToString();
                 }
             }
-        }
-
-        private void DatabaseSelectExportButton_Click(object sender, EventArgs e)
-        {
-            GetChecked();
         }
     }
 }
