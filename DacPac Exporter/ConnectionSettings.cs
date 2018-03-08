@@ -52,7 +52,7 @@ namespace DacPac_Exporter
                 connection.Open();
                 Hide();
 
-                ConfigurationForm configurationForm = new ConfigurationForm();
+                Configuration configurationForm = new Configuration();
                 configurationForm.connection = connection;
                 configurationForm.Show();
             }

@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace DacPac_Exporter
 {
-    public partial class ConfigurationForm : Form
+    public partial class Configuration : Form
     {
         SqlConnection _connection;
         string _filePath;
@@ -24,7 +24,7 @@ namespace DacPac_Exporter
             }
         }
 
-        public ConfigurationForm()
+        public Configuration()
         {
             InitializeComponent();
         }
