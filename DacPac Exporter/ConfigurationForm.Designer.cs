@@ -32,11 +32,12 @@
             this.DatabaseSelectButton = new System.Windows.Forms.Button();
             this.FilePathSelectButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DatabaseSelectButton
             // 
-            this.DatabaseSelectButton.Location = new System.Drawing.Point(128, 95);
+            this.DatabaseSelectButton.Location = new System.Drawing.Point(128, 64);
             this.DatabaseSelectButton.Name = "DatabaseSelectButton";
             this.DatabaseSelectButton.Size = new System.Drawing.Size(250, 35);
             this.DatabaseSelectButton.TabIndex = 0;
@@ -46,7 +47,7 @@
             // 
             // FilePathSelectButton
             // 
-            this.FilePathSelectButton.Location = new System.Drawing.Point(128, 185);
+            this.FilePathSelectButton.Location = new System.Drawing.Point(128, 130);
             this.FilePathSelectButton.Name = "FilePathSelectButton";
             this.FilePathSelectButton.Size = new System.Drawing.Size(250, 35);
             this.FilePathSelectButton.TabIndex = 1;
@@ -54,11 +55,22 @@
             this.FilePathSelectButton.UseVisualStyleBackColor = true;
             this.FilePathSelectButton.Click += new System.EventHandler(this.FilePathSelectButton_Click);
             // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(128, 233);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(250, 35);
+            this.ExportButton.TabIndex = 2;
+            this.ExportButton.Text = "EXPORT";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // ConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 303);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.FilePathSelectButton);
             this.Controls.Add(this.DatabaseSelectButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -76,5 +88,6 @@
         private System.Windows.Forms.Button FilePathSelectButton;
         private System.Windows.Forms.Button DatabaseSelectButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button ExportButton;
     }
 }

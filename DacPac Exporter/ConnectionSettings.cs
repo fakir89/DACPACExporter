@@ -33,10 +33,6 @@ namespace DacPac_Exporter
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            //debug start
-            server = "sup01sql15";
-            //debug end
-
             if (authentificationType == "SQL Server Authentification")
             {
                 connectionString = $"Server={server}; Database=master; User ID={login};Password={password}";
@@ -45,6 +41,10 @@ namespace DacPac_Exporter
             {
                 connectionString = $"Server={server}; Database=master; Trusted_Connection=True;";
             }
+
+            //dmib debug start
+            connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //dmib debug end
 
             SqlConnection connection = new SqlConnection(connectionString);
             try

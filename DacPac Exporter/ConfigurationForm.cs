@@ -14,6 +14,7 @@ namespace DacPac_Exporter
     public partial class ConfigurationForm : Form
     {
         SqlConnection _connection;
+        string _filePath;
 
         public SqlConnection connection
         {
@@ -28,7 +29,6 @@ namespace DacPac_Exporter
             InitializeComponent();
         }
 
-
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
             
@@ -41,13 +41,21 @@ namespace DacPac_Exporter
 
             Hide();
             databaseSelect.Show();
+  
         }
 
         private void FilePathSelectButton_Click(object sender, EventArgs e)
         {
-
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _filePath = folderBrowserDialog1.SelectedPath;
+            }
+            //MessageBox.Show(_filePath);
         }
 
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

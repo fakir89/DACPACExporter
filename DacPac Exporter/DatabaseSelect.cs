@@ -13,7 +13,7 @@ namespace DacPac_Exporter
 {
     public partial class DatabaseSelect : Form
     {
-        string[] checkedDB = new string[1000];
+        public string[] checkedDB = new string[1000];
         int j = 0;
 
         SqlConnection _connection;
