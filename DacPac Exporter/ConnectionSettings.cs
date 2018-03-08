@@ -17,7 +17,6 @@ namespace DacPac_Exporter
         public ConnectionSettingsForm()
         {
             InitializeComponent();
-
         }
         
         string server;
@@ -25,6 +24,7 @@ namespace DacPac_Exporter
         string login;
         string password;
         string connectionString;
+        SqlConnection connection;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -33,28 +33,29 @@ namespace DacPac_Exporter
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            if (authentificationType == "SQL Server Authentification")
-            {
-                connectionString = $"Server={server}; Database=master; User ID={login};Password={password}";
-            }
-            else
-            {
-                connectionString = $"Server={server}; Database=master; Trusted_Connection=True;";
-            }
-
-            //dmib debug start
-            connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            //dmib debug end
-
-            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
+                if (authentificationType == "SQL Server Authentification")
+                {
+                    connectionString = $"Data Source={server};Initial Catalog=master;User ID={login};Password={password}";
+                }
+                else
+                {
+                    connectionString = $"Data Source ={server}; Initial Catalog = master; Integrated Security = True";
+                }
+
+                //dmib debug start
+                connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                //dmib debug end
+                connection = new SqlConnection(connectionString);
+
                 connection.Open();
                 Hide();
 
                 Configuration configurationForm = new Configuration();
                 configurationForm.connection = connection;
                 configurationForm.Show();
+
             }
             catch (Exception ex)
             {
@@ -64,7 +65,6 @@ namespace DacPac_Exporter
             {
                 connection.Close();
             }
-            
         }
 
         private void AuthentificationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -101,5 +101,6 @@ namespace DacPac_Exporter
         {
             password = PasswordTextBox.Text;
         }
+
     }
 }
