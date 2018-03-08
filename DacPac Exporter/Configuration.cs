@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 
 namespace DacPac_Exporter
 {
@@ -68,10 +69,27 @@ namespace DacPac_Exporter
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            //rem SqlPackage.exe /a:extract /SourceConnectionString:"data source=localhost;initial catalog=miuz_mscrm;integrated security=SSPI;" /TargetFile:C:\SqlPackage\dacpac\CRM4.dacpac
-            _batch = _sqlPackagePath + "/a:Extract /SourceConnectionString:" + _connectionString;
-            //   Process.Start(@"cmd.exe", @"/k ""C:\Program Files (x86)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe"" /?");
-            MessageBox.Show(_batch);
+            Process proc = new Process();
+            proc.StartInfo.FileName = "cmd.exe";
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.UseShellExecute = false;
+
+            _batch = "/C " +
+                     " \"" + _sqlPackagePath + "\"" +
+                     " /a:Extract" +
+                     " /SourceConnectionString:\"" + _connection.ConnectionString + "\"" +
+                     " /TargetFile:" +
+                     _filePath + "\\TestA1.dacpac"; 
+            proc.StartInfo.Arguments = _batch;
+            proc.Start();
+
+
+            StreamReader streamReader = proc.StandardOutput;
+            string output = streamReader.ReadToEnd();
+
+            MessageBox.Show(output);
         }
+
+        
     }
 }
