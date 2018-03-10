@@ -93,6 +93,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 800);
             this.Name = "DatabaseSelect";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DACPAC Exporter";
             this.Load += new System.EventHandler(this.DatabaseSelect_Load);
             this.ResumeLayout(false);

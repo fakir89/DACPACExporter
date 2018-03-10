@@ -41,6 +41,11 @@ namespace DacPac_Exporter
         {
         }
 
+        private void ConfigurationForm_Close(object sender, EventArgs e)
+        {
+            CloseConnection();
+        }
+
         private void DatabaseSelectButton_Click(object sender, EventArgs e)
         {
             databaseSelect.connection = _connection;
@@ -93,11 +98,11 @@ namespace DacPac_Exporter
                     }
                 }
 
-                MessageBox.Show("DACPAC Unloading Complete");
+                MessageBox.Show("DACPAC Unloading Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -114,5 +119,7 @@ namespace DacPac_Exporter
                 _connection.Close();
             }
         }
+
+
     }
 }

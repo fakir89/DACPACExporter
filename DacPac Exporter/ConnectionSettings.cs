@@ -14,11 +14,11 @@ namespace DacPac_Exporter
             InitializeComponent();
         }
         
-        string server;
-        string authentificationType;
-        string login;
-        string password;
-        string connectionString;
+        string _server;
+        string _authentificationType;
+        string _login;
+        string _password;
+        string _connectionString;
         SqlConnection connection;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
@@ -30,21 +30,21 @@ namespace DacPac_Exporter
         {
             try
             {
-                if (authentificationType == "SQL Server Authentification")
+                if (_authentificationType == "SQL Server Authentification")
                 {
-                    connectionString = $"Data Source={server};Initial Catalog=master;User ID={login};Password={password}";
+                    _connectionString = $"Data Source={_server};Initial Catalog=master;User ID={_login};Password={_password}";
                 }
                 else
                 {
-                    connectionString = $"Data Source ={server}; Initial Catalog = master; Integrated Security = True";
+                    _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
                 }
 
                 if (ConfigurationManager.AppSettings.Get("Debug") == "true")
                 {
-                    connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                    _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 }
 
-                connection = new SqlConnection(connectionString);
+                connection = new SqlConnection(_connectionString);
 
                 connection.Open();
                 Hide();
@@ -57,23 +57,22 @@ namespace DacPac_Exporter
             catch (Exception ex)
             {
                 CloseConnection();
-                MessageBox.Show(ex.Message);
-                Application.Exit();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void AuthentificationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            authentificationType = AuthentificationTypeComboBox.SelectedItem.ToString();
+            _authentificationType = AuthentificationTypeComboBox.SelectedItem.ToString();
 
-            if (authentificationType == "SQL Server Authentification")
+            if (_authentificationType == "SQL Server Authentification")
             {
                 UserNameLabel.Show();
                 UserNameTextBox.Show();
                 PasswordLabel.Show();
                 PasswordTextBox.Show();
             }
-            else if (authentificationType == "Windows Authentification")
+            else if (_authentificationType == "Windows Authentification")
             {
                 UserNameLabel.Hide();
                 UserNameTextBox.Hide();
@@ -84,17 +83,17 @@ namespace DacPac_Exporter
 
         private void ServerNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            server = ServerNameTextBox.Text;
+            _server = ServerNameTextBox.Text;
         }
 
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            login = UserNameTextBox.Text;
+            _login = UserNameTextBox.Text;
         }
 
         private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            password = PasswordTextBox.Text;
+            _password = PasswordTextBox.Text;
         }
 
         private void CloseConnection()

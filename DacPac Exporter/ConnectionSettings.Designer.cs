@@ -177,6 +177,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 350);
             this.Name = "ConnectionSettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DACPAC Exporter";
             this.Load += new System.EventHandler(this.ConnectionSettingsForm_Load);
             this.ResumeLayout(false);

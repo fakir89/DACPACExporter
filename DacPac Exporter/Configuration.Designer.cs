@@ -33,7 +33,6 @@
             this.FilePathSelectButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ExportButton = new System.Windows.Forms.Button();
-            this.richTextBoxforDebug = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // DatabaseSelectButton
@@ -66,20 +65,11 @@
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
-            // richTextBoxforDebug
-            // 
-            this.richTextBoxforDebug.Location = new System.Drawing.Point(24, 293);
-            this.richTextBoxforDebug.Name = "richTextBoxforDebug";
-            this.richTextBoxforDebug.Size = new System.Drawing.Size(435, 278);
-            this.richTextBoxforDebug.TabIndex = 3;
-            this.richTextBoxforDebug.Text = "";
-            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 603);
-            this.Controls.Add(this.richTextBoxforDebug);
+            this.ClientSize = new System.Drawing.Size(482, 303);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.FilePathSelectButton);
             this.Controls.Add(this.DatabaseSelectButton);
@@ -88,6 +78,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Configuration";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DACPAC Exporter";
             this.Load += new System.EventHandler(this.ConfigurationForm_Load);
             this.ResumeLayout(false);
@@ -99,6 +90,5 @@
         private System.Windows.Forms.Button DatabaseSelectButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button ExportButton;
-        private System.Windows.Forms.RichTextBox richTextBoxforDebug;
     }
 }
