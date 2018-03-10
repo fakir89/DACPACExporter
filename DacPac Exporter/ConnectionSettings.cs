@@ -19,6 +19,7 @@ namespace DacPac_Exporter
         string _login;
         string _password;
         string _connectionString;
+        bool _debug = false;
         SqlConnection connection;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
@@ -39,7 +40,12 @@ namespace DacPac_Exporter
                     _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
                 }
 
-                if (ConfigurationManager.AppSettings.Get("Debug") == "true")
+                if (bool.TryParse(ConfigurationManager.AppSettings.Get("Debug"), out _debug))
+                {
+                    throw new WrongAppSettingValueException("\"Debug\"");
+                }
+
+                if (_debug == true)
                 {
                     _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 }
