@@ -98,10 +98,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SqlPackage\140\SqlPackage.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SqlPackage\140\Hyak.Common.dll" />
+    <Content Include="SqlPackage\140\Microsoft.Azure.Common.dll" />
+    <Content Include="SqlPackage\140\Microsoft.Azure.KeyVault.dll" />
+    <Content Include="SqlPackage\140\Microsoft.Data.Tools.Schema.Sql.dll" />
+    <Content Include="SqlPackage\140\Microsoft.Data.Tools.Utilities.dll" />
+    <Content Include="SqlPackage\140\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="SqlPackage\140\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Dac.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Dac.Extensions.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Dac.Extensions.xml" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Dac.xml" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.DacAzureExtensions.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.DacAzureExtensions.xml" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.TransactSql.ScriptDom.dll" />
+    <Content Include="SqlPackage\140\Microsoft.SqlServer.Types.dll" />
+    <Content Include="SqlPackage\140\Microsoft.Threading.Tasks.dll" />
+    <Content Include="SqlPackage\140\Newtonsoft.Json.dll" />
+    <Content Include="SqlPackage\140\SqlPackage.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

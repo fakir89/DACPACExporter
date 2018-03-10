@@ -40,7 +40,7 @@ namespace DacPac_Exporter
                     _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
                 }
 
-                if (bool.TryParse(ConfigurationManager.AppSettings.Get("Debug"), out _debug))
+                if (!bool.TryParse(ConfigurationManager.AppSettings.Get("Debug"), out _debug))
                 {
                     throw new WrongAppSettingValueException("\"Debug\"");
                 }
@@ -104,11 +104,14 @@ namespace DacPac_Exporter
 
         private void CloseConnection()
         {
-            //Если соединение не закрыто, то закрываем его
-            if (connection.State != ConnectionState.Broken
-                || connection.State != ConnectionState.Closed)
+            if (connection != null)
             {
-                connection.Close();
+                //Если соединение не закрыто, то закрываем его
+                if (connection.State != ConnectionState.Broken
+                    || connection.State != ConnectionState.Closed)
+                {
+                    connection.Close();
+                }
             }
         }
     }

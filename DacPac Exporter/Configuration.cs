@@ -74,7 +74,7 @@ namespace DacPac_Exporter
                 }
 
                 Process proc = new Process();
-                proc.StartInfo.FileName = "C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe"; ;
+                proc.StartInfo.FileName = "D:\\Дима\\Учеба\\C#\\DacPacExporter\\DacPac Exporter\\Utility\\SqlPackage.exe";  //"C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe"; 
                 SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
 
                 foreach (string s in databaseSelect.checkedDB)
