@@ -63,7 +63,7 @@ namespace DacPac_Exporter
             catch (Exception ex)
             {
                 CloseConnection();
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

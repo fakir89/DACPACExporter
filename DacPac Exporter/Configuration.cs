@@ -74,7 +74,9 @@ namespace DacPac_Exporter
                 }
 
                 Process proc = new Process();
-                proc.StartInfo.FileName = "D:\\Дима\\Учеба\\C#\\DacPacExporter\\DacPac Exporter\\Utility\\SqlPackage.exe";  //"C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe"; 
+                proc.StartInfo.FileName = Application.StartupPath + "\\SqlPackage\\140\\SqlPackage.exe";
+                    //"C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe";
+
                 SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
 
                 foreach (string s in databaseSelect.checkedDB)
@@ -98,11 +100,11 @@ namespace DacPac_Exporter
                     }
                 }
 
-                MessageBox.Show("DACPAC Unloading Complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(new Form { TopMost = true }, "DACPAC Unloading Complete", "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
