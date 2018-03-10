@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
+using System.Configuration;
 
 namespace DacPac_Exporter
 {
@@ -18,8 +12,8 @@ namespace DacPac_Exporter
         SqlConnection _connection;
         string _connectionString;
         string _filePath;
-        string _sqlPackagePath = "C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe";
         string _batch;
+        bool _parallelExtraction = false;
 
         public SqlConnection connection
         {
@@ -28,7 +22,6 @@ namespace DacPac_Exporter
                 _connection = value;
             }
         }
-
         public string connectionString
         {
             set
@@ -37,6 +30,8 @@ namespace DacPac_Exporter
             }
         }
 
+        DatabaseSelect databaseSelect = new DatabaseSelect();
+
         public Configuration()
         {
             InitializeComponent();
@@ -44,17 +39,14 @@ namespace DacPac_Exporter
 
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void DatabaseSelectButton_Click(object sender, EventArgs e)
         {
-            DatabaseSelect databaseSelect = new DatabaseSelect();
             databaseSelect.connection = _connection;
-
+            
             Hide();
             databaseSelect.Show();
-  
         }
 
         private void FilePathSelectButton_Click(object sender, EventArgs e)
@@ -63,33 +55,64 @@ namespace DacPac_Exporter
             {
                 _filePath = folderBrowserDialog1.SelectedPath;
             }
-            //MessageBox.Show(_filePath);
-
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            Process proc = new Process();
-            proc.StartInfo.FileName = "cmd.exe";
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.UseShellExecute = false;
+            try
+            {
+                CloseConnection();
 
-            _batch = "/C " +
-                     " \"" + _sqlPackagePath + "\"" +
-                     " /a:Extract" +
-                     " /SourceConnectionString:\"" + _connection.ConnectionString + "\"" +
-                     " /TargetFile:" +
-                     _filePath + "\\TestA1.dacpac"; 
-            proc.StartInfo.Arguments = _batch;
-            proc.Start();
+                if (!bool.TryParse(ConfigurationManager.AppSettings.Get("Parallel Extraction"), out _parallelExtraction))
+                {
+                    throw new WrongAppSettingValueException("\"Parallel Extraction\"");
+                }
 
+                Process proc = new Process();
+                proc.StartInfo.FileName = "C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe"; ;
+                SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
 
-            StreamReader streamReader = proc.StandardOutput;
-            string output = streamReader.ReadToEnd();
+                foreach (string s in databaseSelect.checkedDB)
+                {
+                    if (s == null)
+                    {
+                        break;
+                    }
 
-            MessageBox.Show(output);
+                    stringBuilder.InitialCatalog = s;
+                    _batch = "/a:Extract" +
+                             " /SourceConnectionString:\"" + stringBuilder.ConnectionString + "\"" +
+                             " /TargetFile:" + _filePath + "\\" + stringBuilder.InitialCatalog + ".dacpac";
+
+                    proc.StartInfo.Arguments = _batch;
+                    proc.Start();
+
+                    if (_parallelExtraction == false)
+                    {
+                        proc.WaitForExit();
+                    }
+                }
+
+                MessageBox.Show("DACPAC Unloading Complete");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Application.Exit();
+            }
         }
 
-        
+        private void CloseConnection()
+        {
+            //Если соединение не закрыто, то закрываем его
+            if (_connection.State != ConnectionState.Broken
+                || _connection.State != ConnectionState.Closed)
+            {
+                _connection.Close();
+            }
+        }
     }
 }

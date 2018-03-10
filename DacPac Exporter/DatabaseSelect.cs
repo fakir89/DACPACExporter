@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
@@ -26,7 +20,6 @@ namespace DacPac_Exporter
             }
         }
 
-
         public DatabaseSelect()
         {
             InitializeComponent();
@@ -40,25 +33,28 @@ namespace DacPac_Exporter
         private void DatabaseSelectOKButton_Click(object sender, EventArgs e)
         {
             GetChecked();
-            Close();
-            Application.OpenForms[1].Show();    
-
+            Hide();
+            Application.OpenForms[1].Show();
         }
 
+        //Метод получает список баз данных и выводит их в checkbox на форме
         void FillCheckBoxListDatabaseName()
         {
-            string command = "select name as database_name from sys.databases";
-            SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-
-
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (_connection != null)
             {
-                CheckBoxListDatabaseName.Items.Add(dt.Rows[i]["database_name"].ToString());
+                string command = "select name as database_name from sys.databases";
+                SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CheckBoxListDatabaseName.Items.Add(dt.Rows[i]["database_name"].ToString());
+                }
             }
         }
 
+        //Метод получает отмеченные в checkbox значения и сохраняет в массив
         void GetChecked()
         {
             for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)

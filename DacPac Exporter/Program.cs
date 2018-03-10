@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DacPac_Exporter
 {
@@ -18,6 +15,29 @@ namespace DacPac_Exporter
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ConnectionSettingsForm());
+        }
+    }
+
+    class WrongAppSettingValueException : Exception
+    {
+        string _message;
+
+        public override string Message
+        {
+            get
+            {
+                return _message;
+            }
+        }
+
+        public WrongAppSettingValueException()
+        {
+            _message = "Wrong AppSetting Value";
+        }
+
+        public WrongAppSettingValueException(string key)
+        {
+            _message = $"Wrong AppSetting Value for Key {key}";
         }
     }
 }
