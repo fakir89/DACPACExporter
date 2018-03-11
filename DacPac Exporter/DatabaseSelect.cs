@@ -42,7 +42,7 @@ namespace DacPac_Exporter
         {
             if (_connection != null)
             {
-                string command = "select name as database_name from sys.databases";
+                string command = "select name as database_name from sys.databases where state = 0 and name not in ('master', 'tempdb', 'model', 'msdb', 'ssisdb', 'reportserver', 'ReportServerTempDB', 'mscrm_config')";
                 SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);

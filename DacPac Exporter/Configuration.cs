@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
+using System.IO;
 
 namespace DacPac_Exporter
 {
@@ -11,9 +12,15 @@ namespace DacPac_Exporter
     {
         SqlConnection _connection;
         string _connectionString;
+        string _password;
         string _filePath;
         string _batch;
         bool _parallelExtraction = false;
+        string _text;
+        string _output;
+        string _command;
+        string _newLine = "\r\n";
+        bool _isLoggingCommand = false;
 
         public SqlConnection connection
         {
@@ -29,8 +36,16 @@ namespace DacPac_Exporter
                 _connectionString = value;
             }
         }
+        public string password
+        {
+            set
+            {
+                _password = value;
+            }
+        }
 
         DatabaseSelect databaseSelect = new DatabaseSelect();
+        Logging log = new Logging();
 
         public Configuration()
         {
@@ -75,9 +90,16 @@ namespace DacPac_Exporter
 
                 Process proc = new Process();
                 proc.StartInfo.FileName = Application.StartupPath + "\\SqlPackage\\140\\SqlPackage.exe";
-                    //"C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DAC\\bin\\SqlPackage.exe";
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
 
                 SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
+
+                if (_password != null)
+                {
+                    stringBuilder.Password = _password;
+                }
 
                 foreach (string s in databaseSelect.checkedDB)
                 {
@@ -94,6 +116,21 @@ namespace DacPac_Exporter
                     proc.StartInfo.Arguments = _batch;
                     proc.Start();
 
+                    _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
+
+                    //Логируем то, что вывелось в консоль
+                    if (_isLoggingCommand == true)
+                    {
+                        _command = "Command: " + _newLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + _newLine + _newLine;
+                        _text = _command + _output;
+                    }
+                    else
+                    {
+                        _text = _output;
+                    }
+
+                        log.WriteToLog(_text);
+
                     if (_parallelExtraction == false)
                     {
                         proc.WaitForExit();
@@ -104,6 +141,7 @@ namespace DacPac_Exporter
             }
             catch (Exception ex)
             {
+                log.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
