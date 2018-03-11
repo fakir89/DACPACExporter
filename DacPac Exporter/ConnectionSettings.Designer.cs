@@ -46,7 +46,7 @@
             this.ServerNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ServerNameTextBox.Location = new System.Drawing.Point(238, 79);
+            this.ServerNameTextBox.Location = new System.Drawing.Point(238, 78);
             this.ServerNameTextBox.Name = "ServerNameTextBox";
             this.ServerNameTextBox.Size = new System.Drawing.Size(219, 22);
             this.ServerNameTextBox.TabIndex = 0;
@@ -55,20 +55,20 @@
             // ServerNameLabel
             // 
             this.ServerNameLabel.AutoSize = true;
-            this.ServerNameLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ServerNameLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ServerNameLabel.Location = new System.Drawing.Point(33, 82);
             this.ServerNameLabel.Name = "ServerNameLabel";
-            this.ServerNameLabel.Size = new System.Drawing.Size(114, 19);
+            this.ServerNameLabel.Size = new System.Drawing.Size(104, 18);
             this.ServerNameLabel.TabIndex = 1;
             this.ServerNameLabel.Text = "Server Name:";
             // 
             // UserNameLabel
             // 
             this.UserNameLabel.AutoSize = true;
-            this.UserNameLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.UserNameLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.UserNameLabel.Location = new System.Drawing.Point(33, 144);
             this.UserNameLabel.Name = "UserNameLabel";
-            this.UserNameLabel.Size = new System.Drawing.Size(99, 19);
+            this.UserNameLabel.Size = new System.Drawing.Size(90, 18);
             this.UserNameLabel.TabIndex = 3;
             this.UserNameLabel.Text = "User Name:";
             this.UserNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -94,7 +94,7 @@
             this.AuthentificationTypeComboBox.Items.AddRange(new object[] {
             "SQL Server Authentification",
             "Windows Authentification"});
-            this.AuthentificationTypeComboBox.Location = new System.Drawing.Point(238, 109);
+            this.AuthentificationTypeComboBox.Location = new System.Drawing.Point(238, 108);
             this.AuthentificationTypeComboBox.Name = "AuthentificationTypeComboBox";
             this.AuthentificationTypeComboBox.Size = new System.Drawing.Size(219, 24);
             this.AuthentificationTypeComboBox.TabIndex = 4;
@@ -103,20 +103,20 @@
             // AuthentificationTypeLabel
             // 
             this.AuthentificationTypeLabel.AutoSize = true;
-            this.AuthentificationTypeLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AuthentificationTypeLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AuthentificationTypeLabel.Location = new System.Drawing.Point(33, 114);
             this.AuthentificationTypeLabel.Name = "AuthentificationTypeLabel";
-            this.AuthentificationTypeLabel.Size = new System.Drawing.Size(171, 19);
+            this.AuthentificationTypeLabel.Size = new System.Drawing.Size(163, 18);
             this.AuthentificationTypeLabel.TabIndex = 5;
             this.AuthentificationTypeLabel.Text = "Authentification Type:";
             // 
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PasswordLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PasswordLabel.Location = new System.Drawing.Point(33, 175);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(88, 19);
+            this.PasswordLabel.Size = new System.Drawing.Size(81, 18);
             this.PasswordLabel.TabIndex = 7;
             this.PasswordLabel.Text = "Password:";
             this.PasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -126,7 +126,7 @@
             this.PasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PasswordTextBox.Location = new System.Drawing.Point(238, 172);
+            this.PasswordTextBox.Location = new System.Drawing.Point(238, 175);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(219, 22);
             this.PasswordTextBox.TabIndex = 6;

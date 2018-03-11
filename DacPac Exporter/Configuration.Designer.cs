@@ -37,7 +37,8 @@
             // 
             // DatabaseSelectButton
             // 
-            this.DatabaseSelectButton.Location = new System.Drawing.Point(128, 64);
+            this.DatabaseSelectButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DatabaseSelectButton.Location = new System.Drawing.Point(66, 58);
             this.DatabaseSelectButton.Name = "DatabaseSelectButton";
             this.DatabaseSelectButton.Size = new System.Drawing.Size(250, 35);
             this.DatabaseSelectButton.TabIndex = 0;
@@ -47,7 +48,8 @@
             // 
             // FilePathSelectButton
             // 
-            this.FilePathSelectButton.Location = new System.Drawing.Point(128, 130);
+            this.FilePathSelectButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FilePathSelectButton.Location = new System.Drawing.Point(66, 115);
             this.FilePathSelectButton.Name = "FilePathSelectButton";
             this.FilePathSelectButton.Size = new System.Drawing.Size(250, 35);
             this.FilePathSelectButton.TabIndex = 1;
@@ -57,7 +59,8 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(128, 233);
+            this.ExportButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ExportButton.Location = new System.Drawing.Point(66, 230);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(250, 35);
             this.ExportButton.TabIndex = 2;
@@ -69,7 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 303);
+            this.ClientSize = new System.Drawing.Size(382, 303);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.FilePathSelectButton);
             this.Controls.Add(this.DatabaseSelectButton);
