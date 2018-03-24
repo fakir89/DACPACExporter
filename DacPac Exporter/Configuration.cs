@@ -111,7 +111,7 @@ namespace DacPac_Exporter
                     stringBuilder.InitialCatalog = s;
                     _batch = "/a:Extract" +
                              " /SourceConnectionString:\"" + stringBuilder.ConnectionString + "\"" +
-                             " /TargetFile:" + _filePath + "\\" + stringBuilder.InitialCatalog + ".dacpac";
+                             " /TargetFile:\"" + _filePath + "\\" + stringBuilder.InitialCatalog + ".dacpac\"";
 
                     proc.StartInfo.Arguments = _batch;
                     proc.Start();
