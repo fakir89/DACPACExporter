@@ -89,7 +89,7 @@ namespace DacPac_Exporter
                 }
 
                 Process proc = new Process();
-                proc.StartInfo.FileName = Application.StartupPath + "\\SqlPackage\\140\\SqlPackage.exe";
+                proc.StartInfo.FileName = Application.StartupPath + "\\SqlPackage\\SqlPackage.exe";
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.RedirectStandardError = true;
