@@ -37,8 +37,10 @@ namespace DacPac_Exporter
             Application.OpenForms[1].Show();
         }
 
-        //Метод получает список баз данных и выводит их в checkbox на форме
-        void FillCheckBoxListDatabaseName()
+        /// <summary>
+        /// Метод получает список баз данных и выводит их в checkbox на форме
+        /// </summary>
+        private void FillCheckBoxListDatabaseName()
         {
             if (_connection != null)
             {
@@ -54,8 +56,10 @@ namespace DacPac_Exporter
             }
         }
 
-        //Метод получает отмеченные в checkbox значения и сохраняет в массив
-        void GetChecked()
+        /// <summary>
+        /// Метод получает отмеченные в checkbox значения и сохраняет в массив
+        /// </summary>
+        private void GetChecked()
         {
             for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)
             {

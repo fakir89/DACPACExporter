@@ -58,8 +58,8 @@ namespace DacPac_Exporter
                 Hide();
 
                 Configuration configurationForm = new Configuration();
-                configurationForm.connection = connection;
-                configurationForm.password = _password;
+                configurationForm.Connection = connection;
+                configurationForm.Password = _password;
 
                 configurationForm.Show();
 

@@ -10,33 +10,33 @@ namespace DacPac_Exporter
 {
     public partial class Configuration : Form
     {
-        SqlConnection _connection;
-        string _connectionString;
-        string _password;
-        string _filePath;
-        string _batch;
-        bool _parallelExtraction = false;
-        string _text;
-        string _output;
-        string _command;
-        string _newLine = "\r\n";
-        bool _isLoggingCommand = false;
+        private SqlConnection _connection;
+        private string _connectionString;
+        private string _password;
+        private string _filePath;
+        private string _batch;
+        private bool _parallelExtraction = false;
+        private string _text;
+        private string _output;
+        private string _command;
+        private string _newLine = "\r\n";
+        private bool _isLoggingCommand = false;
 
-        public SqlConnection connection
+        public SqlConnection Connection
         {
             set
             {
                 _connection = value;
             }
         }
-        public string connectionString
+        public string ConnectionString
         {
             set
             {
                 _connectionString = value;
             }
         }
-        public string password
+        public string Password
         {
             set
             {
@@ -64,9 +64,10 @@ namespace DacPac_Exporter
         private void DatabaseSelectButton_Click(object sender, EventArgs e)
         {
             databaseSelect.connection = _connection;
-            
+
             Hide();
             databaseSelect.Show();
+            FilePathSelectButton.Focus();
         }
 
         private void FilePathSelectButton_Click(object sender, EventArgs e)
@@ -75,6 +76,7 @@ namespace DacPac_Exporter
             {
                 _filePath = folderBrowserDialog1.SelectedPath;
             }
+            ExportButton.Focus();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
