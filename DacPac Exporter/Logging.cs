@@ -8,33 +8,17 @@ using System.IO;
 
 namespace DacPac_Exporter
 {
-    class Logging
+    internal static class Logging
     {
         static string _path = Application.StartupPath + @"\log.txt";
-        string _appentText;
-        char _delimiter = '=';
-        short numOfRepeat = 50;
-        string _delimiterString;
-        string newLine = "\r\n";
+        static string _appentText;
+        static string _delimiterString;
 
-        public void WriteToLog(string text)
+        public static void WriteToLog(string text)
         {
-            _delimiterString = GetDelemiterString(_delimiter);
-            _appentText = newLine + DateTime.Now + " " + _delimiterString + " " + newLine + text;
-
+            _delimiterString = new string('=', 50);
+            _appentText = Environment.NewLine + DateTime.Now + " " + _delimiterString + " " + Environment.NewLine + text;
             File.AppendAllText(_path, _appentText, Encoding.UTF8);
         }
-
-        private string GetDelemiterString(char delimiter)
-        {
-            string s = "";
-
-            for (short i = 0; i < numOfRepeat; i++)
-            {
-                s += delimiter;
-            }
-            return s;
-        }
-
     }
 }

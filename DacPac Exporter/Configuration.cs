@@ -45,7 +45,6 @@ namespace DacPac_Exporter
         }
 
         DatabaseSelect databaseSelect = new DatabaseSelect();
-        Logging log = new Logging();
 
         public Configuration()
         {
@@ -131,7 +130,7 @@ namespace DacPac_Exporter
                         _text = _output;
                     }
 
-                        log.WriteToLog(_text);
+                        Logging.WriteToLog(_text);
 
                     if (_parallelExtraction == false)
                     {
@@ -143,7 +142,7 @@ namespace DacPac_Exporter
             }
             catch (Exception ex)
             {
-                log.WriteToLog(ex.Message);
+                Logging.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

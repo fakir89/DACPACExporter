@@ -22,8 +22,6 @@ namespace DacPac_Exporter
         bool _debug = false;
         SqlConnection connection;
 
-        Logging log = new Logging();
-
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
             AuthentificationTypeComboBox.SelectedItem = "Windows Authentification";
@@ -69,7 +67,7 @@ namespace DacPac_Exporter
                 CloseConnection();
 
                 //Логируем ошибки
-                log.WriteToLog(ex.Message);
+                Logging.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
