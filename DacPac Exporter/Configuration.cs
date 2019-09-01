@@ -29,7 +29,6 @@ namespace DacPac_Exporter
             _connection = sqlConnection;
             _password = password;
             databaseSelect = new DatabaseSelect() {Connection = sqlConnection};
-
         }
 
         private void ConfigurationForm_Close(object sender, EventArgs e)

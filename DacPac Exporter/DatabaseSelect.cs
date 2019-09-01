@@ -2,12 +2,13 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace DacPac_Exporter
 {
     public partial class DatabaseSelect : Form
     {
-        public string[] checkedDB = new string[1000];
+        public List<string> checkedDB = new List<string>();
         public SqlConnection Connection { get; set; }
 
         public DatabaseSelect()
@@ -47,17 +48,15 @@ namespace DacPac_Exporter
         }
 
         /// <summary>
-        /// Метод получает отмеченные в checkbox значения и сохраняет в массив
+        /// Метод получает отмеченные в checkbox значения и сохраняет в коллекцию
         /// </summary>
         private void GetChecked()
         {
-            int j = 0;
-
             for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)
             {
                 if (CheckBoxListDatabaseName.GetItemChecked(i))
                 {
-                    checkedDB[j++] = CheckBoxListDatabaseName.Items[i].ToString();
+                    checkedDB.Add(CheckBoxListDatabaseName.Items[i].ToString());
                 }
             }
         }
