@@ -62,7 +62,6 @@ namespace DacPac_Exporter
                 {
                     throw new WrongAppSettingValueException("\"Parallel Extraction\"");
                 }
-
                 
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = Application.StartupPath + "\\SqlPackage\\SqlPackage.exe";
@@ -70,8 +69,8 @@ namespace DacPac_Exporter
                 processStartInfo.CreateNoWindow = true;
                 processStartInfo.RedirectStandardOutput = true;
                 processStartInfo.RedirectStandardError = true;
-                processStartInfo.StandardOutputEncoding = Encoding.GetEncoding(866);
-                processStartInfo.StandardErrorEncoding = Encoding.GetEncoding(866);
+                processStartInfo.StandardOutputEncoding = Encoding.GetEncoding(866); // 866 - DOS
+                processStartInfo.StandardErrorEncoding = Encoding.GetEncoding(866); 
 
                 SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
 
@@ -93,7 +92,6 @@ namespace DacPac_Exporter
                              " /TargetFile:\"" + _filePath + "\\" + stringBuilder.InitialCatalog + ".dacpac\"";
 
                     processStartInfo.Arguments = _batch;
-
                     Process proc = Process.Start(processStartInfo);
 
                     _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
@@ -109,14 +107,12 @@ namespace DacPac_Exporter
                         _text = _output;
                     }
 
-                        Logging.WriteToLog(_text);
+                    Logging.WriteToLog(_text);
 
                     if (_parallelExtraction == false)
-                    {
                         proc.WaitForExit();
-                    }
-                }
 
+                }
                 MessageBox.Show(new Form { TopMost = true }, "DACPAC Unloading Complete", "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
