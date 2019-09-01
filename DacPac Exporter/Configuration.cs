@@ -20,7 +20,6 @@ namespace DacPac_Exporter
         private string _command;
         private bool _isLoggingCommand = false;
         private DatabaseSelect databaseSelect;
-        public bool isDatabaseSelectOpen { get; set; }
 
         public Configuration(SqlConnection sqlConnection, string password)
         {
