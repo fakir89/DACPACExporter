@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Configuration;
 using System.IO;
+using System.Text;
 
 namespace DacPac_Exporter
 {
@@ -62,11 +63,15 @@ namespace DacPac_Exporter
                     throw new WrongAppSettingValueException("\"Parallel Extraction\"");
                 }
 
-                Process proc = new Process();
-                proc.StartInfo.FileName = Application.StartupPath + "\\SqlPackage\\SqlPackage.exe";
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
+                
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = Application.StartupPath + "\\SqlPackage\\SqlPackage.exe";
+                processStartInfo.UseShellExecute = false;
+                processStartInfo.CreateNoWindow = true;
+                processStartInfo.RedirectStandardOutput = true;
+                processStartInfo.RedirectStandardError = true;
+                processStartInfo.StandardOutputEncoding = Encoding.GetEncoding(866);
+                processStartInfo.StandardErrorEncoding = Encoding.GetEncoding(866);
 
                 SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder(_connection.ConnectionString);
 
@@ -87,8 +92,9 @@ namespace DacPac_Exporter
                              " /SourceConnectionString:\"" + stringBuilder.ConnectionString + "\"" +
                              " /TargetFile:\"" + _filePath + "\\" + stringBuilder.InitialCatalog + ".dacpac\"";
 
-                    proc.StartInfo.Arguments = _batch;
-                    proc.Start();
+                    processStartInfo.Arguments = _batch;
+
+                    Process proc = Process.Start(processStartInfo);
 
                     _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
 
@@ -133,7 +139,5 @@ namespace DacPac_Exporter
                 _connection.Close();
             }
         }
-
-
     }
 }
