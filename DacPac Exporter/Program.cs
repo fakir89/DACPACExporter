@@ -18,27 +18,6 @@ namespace DacPac_Exporter
         }
     }
 
-    class WrongAppSettingValueException : Exception
-    {
-        string _message;
 
-        public override string Message
-        {
-            get
-            {
-                return _message;
-            }
-        }
-
-        public WrongAppSettingValueException()
-        {
-            _message = "Wrong AppSetting Value";
-        }
-
-        public WrongAppSettingValueException(string key)
-        {
-            _message = $"Wrong AppSetting Value for Key {key}";
-        }
-    }
 
 }
