@@ -8,19 +8,18 @@ namespace DacPac_Exporter
 {
     public partial class ConnectionSettingsForm : Form
     {
-
         public ConnectionSettingsForm()
         {
             InitializeComponent();
         }
         
-        string _server;
-        string _authentificationType;
-        string _login;
-        string _password;
-        string _connectionString;
-        bool _debug = false;
-        SqlConnection connection;
+        private string _server;
+        private string _authentificationType;
+        private string _login;
+        private string _password;
+        private string _connectionString;
+        private bool _debug = false;
+        private SqlConnection connection;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -55,10 +54,7 @@ namespace DacPac_Exporter
                 connection.Open();
                 Hide();
 
-                Configuration configurationForm = new Configuration();
-                configurationForm.Connection = connection;
-                configurationForm.Password = _password;
-
+                Configuration configurationForm = new Configuration(connection, _password);
                 configurationForm.Show();
 
             }

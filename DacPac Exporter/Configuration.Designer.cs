@@ -1,4 +1,6 @@
-﻿namespace DacPac_Exporter
+﻿using System;
+
+namespace DacPac_Exporter
 {
     partial class Configuration
     {
@@ -83,12 +85,11 @@
             this.Name = "Configuration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DACPAC Exporter";
-            this.Load += new System.EventHandler(this.ConfigurationForm_Load);
             this.ResumeLayout(false);
 
         }
 
-        #endregion
+#endregion
         private System.Windows.Forms.Button FilePathSelectButton;
         private System.Windows.Forms.Button DatabaseSelectButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;

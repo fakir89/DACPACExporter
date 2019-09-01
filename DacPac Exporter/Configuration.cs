@@ -11,7 +11,6 @@ namespace DacPac_Exporter
     public partial class Configuration : Form
     {
         private SqlConnection _connection;
-        private string _connectionString;
         private string _password;
         private string _filePath;
         private string _batch;
@@ -19,40 +18,18 @@ namespace DacPac_Exporter
         private string _text;
         private string _output;
         private string _command;
-        private string _newLine = "\r\n";
         private bool _isLoggingCommand = false;
+        private DatabaseSelect databaseSelect;
+        public bool isDatabaseSelectOpen { get; set; }
 
-        public SqlConnection Connection
-        {
-            set
-            {
-                _connection = value;
-            }
-        }
-        public string ConnectionString
-        {
-            set
-            {
-                _connectionString = value;
-            }
-        }
-        public string Password
-        {
-            set
-            {
-                _password = value;
-            }
-        }
-
-        DatabaseSelect databaseSelect = new DatabaseSelect();
-
-        public Configuration()
+        public Configuration(SqlConnection sqlConnection, string password)
         {
             InitializeComponent();
-        }
 
-        private void ConfigurationForm_Load(object sender, EventArgs e)
-        {
+            _connection = sqlConnection;
+            _password = password;
+            databaseSelect = new DatabaseSelect() {Connection = sqlConnection};
+
         }
 
         private void ConfigurationForm_Close(object sender, EventArgs e)
@@ -62,20 +39,18 @@ namespace DacPac_Exporter
 
         private void DatabaseSelectButton_Click(object sender, EventArgs e)
         {
-            databaseSelect.connection = _connection;
-
-            Hide();
-            databaseSelect.Show();
             FilePathSelectButton.Focus();
+            databaseSelect.Show();
+            Hide();
         }
 
         private void FilePathSelectButton_Click(object sender, EventArgs e)
         {
+            ExportButton.Focus();
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 _filePath = folderBrowserDialog1.SelectedPath;
             }
-            ExportButton.Focus();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
@@ -122,7 +97,7 @@ namespace DacPac_Exporter
                     //Логируем то, что вывелось в консоль
                     if (_isLoggingCommand == true)
                     {
-                        _command = "Command: " + _newLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + _newLine + _newLine;
+                        _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
                         _text = _command + _output;
                     }
                     else

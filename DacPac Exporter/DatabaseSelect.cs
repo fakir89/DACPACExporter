@@ -8,17 +8,7 @@ namespace DacPac_Exporter
     public partial class DatabaseSelect : Form
     {
         public string[] checkedDB = new string[1000];
-        int j = 0;
-
-        SqlConnection _connection;
-
-        public SqlConnection connection
-        {
-            set
-            {
-                _connection = value;
-            }
-        }
+        public SqlConnection Connection { get; set; }
 
         public DatabaseSelect()
         {
@@ -34,7 +24,7 @@ namespace DacPac_Exporter
         {
             GetChecked();
             Hide();
-            Application.OpenForms[1].Show();
+            ((Configuration)Application.OpenForms[1]).Show();
         }
 
         /// <summary>
@@ -42,10 +32,10 @@ namespace DacPac_Exporter
         /// </summary>
         private void FillCheckBoxListDatabaseName()
         {
-            if (_connection != null)
+            if (Connection != null)
             {
                 string command = "select name as database_name from sys.databases where state = 0 and name not in ('master', 'tempdb', 'model', 'msdb', 'ssisdb', 'reportserver', 'ReportServerTempDB', 'mscrm_config')";
-                SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command, Connection);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
@@ -61,6 +51,8 @@ namespace DacPac_Exporter
         /// </summary>
         private void GetChecked()
         {
+            int j = 0;
+
             for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)
             {
                 if (CheckBoxListDatabaseName.GetItemChecked(i))
