@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DacPac_Exporter
+{
+    interface IExportable
+    {
+        SqlConnection Connection { get; }
+        SqlConnectionStringBuilder ConnectionString { get; }
+        List<string> DbToExport { get; }
+        string ExportDirectory { get; }
+
+
+    }
+
+    /// <summary>
+    /// Класс содержит информацию о параметрах выгрузки файлов
+    /// </summary>
+    public class ExportDefinition : IExportable
+    {
+        /// <summary>
+        /// SqlConnection
+        /// </summary>
+        public SqlConnection Connection { get; }
+        /// <summary>
+        /// Строка подключения к базе данных
+        /// </summary>
+        public SqlConnectionStringBuilder ConnectionString { get; }
+
+        /// <summary>
+        /// Список имен баз для выгрузки
+        /// </summary>
+        public List<string> DbToExport { get; set; }
+
+        /// <summary>
+        /// Директория, куда будут сохранены файлы
+        /// </summary>
+        public string ExportDirectory { get; set; }
+
+        public ExportDefinition(SqlConnection connection)
+        {
+            Connection = connection;
+            ConnectionString = new SqlConnectionStringBuilder(connection.ConnectionString);
+        }
+    }
+}

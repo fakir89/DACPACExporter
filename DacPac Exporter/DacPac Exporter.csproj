@@ -90,47 +90,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs">
+    <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuration.Designer.cs">
+    <Compile Include="Forms\Configuration.Designer.cs">
       <DependentUpon>Configuration.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseSelect.cs">
+    <Compile Include="Forms\DatabaseSelect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DatabaseSelect.Designer.cs">
+    <Compile Include="Forms\DatabaseSelect.Designer.cs">
       <DependentUpon>DatabaseSelect.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionSettings.cs">
+    <Compile Include="Forms\ConnectionSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectionSettings.Designer.cs">
+    <Compile Include="Forms\ConnectionSettings.Designer.cs">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Exception\WrongAppSettingValueException.cs" />
-    <Compile Include="ExportInProcess.cs">
+    <Compile Include="Class\ExportDefinition.cs" />
+    <Compile Include="Forms\ExportInProcess.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExportInProcess.Designer.cs">
+    <Compile Include="Forms\ExportInProcess.Designer.cs">
       <DependentUpon>ExportInProcess.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logging.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Logging.cs" />
+    <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Configuration.resx">
+    <EmbeddedResource Include="Forms\Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionSettings.en-US.resx">
+    <EmbeddedResource Include="Forms\ConnectionSettings.en-US.resx">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionSettings.resx">
+    <EmbeddedResource Include="Forms\ConnectionSettings.resx">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DatabaseSelect.resx">
+    <EmbeddedResource Include="Forms\DatabaseSelect.resx">
       <DependentUpon>DatabaseSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExportInProcess.resx">
+    <EmbeddedResource Include="Forms\ExportInProcess.resx">
       <DependentUpon>ExportInProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -153,7 +154,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="SqlPackage\SqlPackage.exe.config">
+    <Content Include="Resources\SqlPackage\SqlPackage.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -164,64 +165,64 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <Content Include="SqlPackage\DacUnpack.exe">
+    <Content Include="Resources\SqlPackage\DacUnpack.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Hyak.Common.dll">
+    <Content Include="Resources\SqlPackage\Hyak.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.Azure.Common.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.Azure.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.Azure.KeyVault.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.Azure.KeyVault.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.Data.Tools.Schema.Sql.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.Data.Tools.Schema.Sql.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.Data.Tools.Utilities.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.Data.Tools.Utilities.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Dac.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Dac.Extensions.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Dac.Extensions.xml">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Dac.xml">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.DacAzureExtensions.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.DacAzureExtensions.xml">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.TransactSql.ScriptDom.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.TransactSql.ScriptDom.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.SqlServer.Types.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Types.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Microsoft.Threading.Tasks.dll">
+    <Content Include="Resources\SqlPackage\Microsoft.Threading.Tasks.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\Newtonsoft.Json.dll">
+    <Content Include="Resources\SqlPackage\Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SqlPackage\SqlPackage.exe">
+    <Content Include="Resources\SqlPackage\SqlPackage.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

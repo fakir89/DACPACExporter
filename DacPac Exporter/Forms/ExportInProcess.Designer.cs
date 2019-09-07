@@ -59,6 +59,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ExportInProcess";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.ExportInPorocess_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
