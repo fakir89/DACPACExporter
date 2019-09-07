@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace DacPac_Exporter
 {
@@ -125,7 +126,6 @@ namespace DacPac_Exporter
                 Application.Exit();
             }
         }
-
         private void CloseConnection()
         {
             //Если соединение не закрыто, то закрываем его
