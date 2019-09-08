@@ -67,7 +67,7 @@ namespace DacPac_Exporter
             _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
 
             //Логируем то, что вывелось в консоль
-            if (AppConfiguration.GetAppConfigSetting("Debug") == true)
+            if (AppConfiguration.GetAppConfigSetting("LogCommand") == true)
             {
                 _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
                 _text = _command + _output;
