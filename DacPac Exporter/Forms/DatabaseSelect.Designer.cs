@@ -36,6 +36,9 @@
             // 
             // CheckBoxListDatabaseName
             // 
+            this.CheckBoxListDatabaseName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CheckBoxListDatabaseName.CheckOnClick = true;
             this.CheckBoxListDatabaseName.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CheckBoxListDatabaseName.FormattingEnabled = true;
@@ -81,16 +84,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(482, 753);
             this.Controls.Add(this.ChooseDatabasesToExportLabel);
             this.Controls.Add(this.DatabaseSelectOKButton);
             this.Controls.Add(this.CheckBoxListDatabaseName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 1000);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 800);
             this.Name = "DatabaseSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

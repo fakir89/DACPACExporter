@@ -66,11 +66,12 @@
             this.ClientSize = new System.Drawing.Size(600, 160);
             this.Controls.Add(this.lblReportAboutCount);
             this.Controls.Add(this.progressBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ExportInProcess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ExportInProcess";
+            this.Text = "DACPAC Exporter";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ExportInProcess_Load);
             this.ResumeLayout(false);
