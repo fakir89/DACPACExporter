@@ -48,7 +48,7 @@
             this.lblReportAboutCount.Name = "lblReportAboutCount";
             this.lblReportAboutCount.Size = new System.Drawing.Size(500, 40);
             this.lblReportAboutCount.TabIndex = 1;
-            this.lblReportAboutCount.Text = "Выгрузка... ";
+            this.lblReportAboutCount.Text = "Unloading... ";
             this.lblReportAboutCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblReportAboutCount.UseCompatibleTextRendering = true;
             // 

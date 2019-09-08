@@ -15,9 +15,10 @@ namespace DacPac_Exporter
         private string _server;
         private string _authentificationType;
         private string _login;
-        private string _password;
+        private string _password = null;
         private string _connectionString;
         private SqlConnection connection;
+        private ExportDefinition exportDefinition;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -45,7 +46,14 @@ namespace DacPac_Exporter
                 connection.Open();
                 Hide();
 
-                ExportDefinition exportDefinition = new ExportDefinition(connection);
+                if (_password != null)
+                {
+                    exportDefinition = new ExportDefinition(connection, _password);
+                }
+                else
+                {
+                    exportDefinition = new ExportDefinition(connection);
+                }
 
                 Configuration configurationForm = new Configuration(exportDefinition);
                 configurationForm.Show();
@@ -58,6 +66,7 @@ namespace DacPac_Exporter
                 //Логируем ошибки
                 Logging.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 

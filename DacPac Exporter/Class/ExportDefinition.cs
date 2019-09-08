@@ -9,8 +9,6 @@ namespace DacPac_Exporter
         SqlConnectionStringBuilder ConnectionString { get; }
         List<string> DbToExport { get; }
         string ExportDirectory { get; }
-
-
     }
 
     /// <summary>
@@ -41,6 +39,12 @@ namespace DacPac_Exporter
         {
             Connection = connection;
             ConnectionString = new SqlConnectionStringBuilder(connection.ConnectionString);
+            DbToExport = new List<string>();
+        }
+        public ExportDefinition(SqlConnection connection, string password)
+        {
+            Connection = connection;
+            ConnectionString = new SqlConnectionStringBuilder(connection.ConnectionString) { Password = password };
             DbToExport = new List<string>();
         }
     }

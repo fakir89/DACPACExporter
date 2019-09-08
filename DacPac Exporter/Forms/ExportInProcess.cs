@@ -104,7 +104,7 @@ namespace DacPac_Exporter
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
-            lblReportAboutCount.Text = $"Прогресс выполнения {e.ProgressPercentage.ToString()}%";
+            lblReportAboutCount.Text = $"Progress {e.ProgressPercentage.ToString()}%";
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
