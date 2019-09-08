@@ -53,11 +53,13 @@ namespace DacPac_Exporter
         /// <param name="dbName">Имя выгружаемой базы данных</param>
         private void ExportDB(string dbName)
         {
+            if (backgroundWorker.CancellationPending == true)
+                return;
+
             string _batch, _output, _command, _text;
 
-            SqlConnectionStringBuilder sqlConnectionString = _exportDefinition.ConnectionString;
-            sqlConnectionString.InitialCatalog = dbName;
-            _batch = $"/a:Extract /SourceConnectionString:\"{sqlConnectionString}\" /TargetFile:\"{_exportDefinition.ExportDirectory}\\{sqlConnectionString.InitialCatalog}.dacpac\"";
+            _exportDefinition.ConnectionString.InitialCatalog = dbName;
+            _batch = $"/a:Extract /SourceConnectionString:\"{_exportDefinition.ConnectionString}\" /TargetFile:\"{_exportDefinition.ExportDirectory}\\{_exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
 
             processStartInfo.Arguments = _batch;
             Process proc = Process.Start(processStartInfo);
@@ -120,6 +122,11 @@ namespace DacPac_Exporter
         private void ExportInProcess_Load(object sender, EventArgs e)
         {
             backgroundWorker.RunWorkerAsync();
+        }
+
+        private void ExportInProcess_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            backgroundWorker.CancelAsync();
         }
     }
 }
