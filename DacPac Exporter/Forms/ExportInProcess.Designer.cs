@@ -28,46 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportInProcess));
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblReportAboutCount = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(50, 130);
+            this.progressBar.Location = new System.Drawing.Point(50, 100);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(500, 30);
             this.progressBar.TabIndex = 0;
             // 
-            // textBox1
+            // lblReportAboutCount
             // 
-            this.textBox1.Location = new System.Drawing.Point(50, 40);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(500, 50);
-            this.textBox1.TabIndex = 1;
+            this.lblReportAboutCount.Location = new System.Drawing.Point(50, 30);
+            this.lblReportAboutCount.Margin = new System.Windows.Forms.Padding(3);
+            this.lblReportAboutCount.Name = "lblReportAboutCount";
+            this.lblReportAboutCount.Size = new System.Drawing.Size(500, 40);
+            this.lblReportAboutCount.TabIndex = 1;
+            this.lblReportAboutCount.Text = "Выгрузка... ";
+            this.lblReportAboutCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblReportAboutCount.UseCompatibleTextRendering = true;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
             // ExportInProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 200);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(600, 160);
+            this.Controls.Add(this.lblReportAboutCount);
             this.Controls.Add(this.progressBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportInProcess";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExportInProcess";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.ExportInPorocess_Load);
+            this.Load += new System.EventHandler(this.ExportInProcess_Load);
+            this.Shown += new System.EventHandler(this.ExportInProgress_Shown);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblReportAboutCount;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

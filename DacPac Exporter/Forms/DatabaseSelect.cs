@@ -23,8 +23,8 @@ namespace DacPac_Exporter
         private void DatabaseSelectOKButton_Click(object sender, EventArgs e)
         {
             GetChecked();
-            Hide();
             ((Configuration)Application.OpenForms[1]).Show();
+            Hide();
         }
 
         /// <summary>

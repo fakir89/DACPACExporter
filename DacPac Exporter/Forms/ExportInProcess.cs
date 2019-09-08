@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DacPac_Exporter
@@ -20,15 +15,24 @@ namespace DacPac_Exporter
         private bool _parallelExtraction = false;
 
         private ExportDefinition _exportDefinition;
-        ProcessStartInfo processStartInfo;
-        private string _output;
-        private string _command;
-        private string _text;
+        private ProcessStartInfo processStartInfo;
 
         public ExportInProcess(ExportDefinition ed)
         {
-            InitializeComponent();
             _exportDefinition = ed;
+            InitializeComponent();
+            InitializeProcessStartInfo();
+            InitializeProgressBarProperty();
+            //lblReportAboutCount.Visible = true;
+            //lblReportAboutCount.Text = "Выгрузка...";
+        }
+
+        #region Инициализаторы
+        /// <summary>
+        /// Метод задает параметры запуска фонового процесса 
+        /// </summary>
+        private void InitializeProcessStartInfo()
+        {
             processStartInfo = new ProcessStartInfo();
             processStartInfo.FileName = Application.StartupPath + @"\Resources\SqlPackage\SqlPackage.exe";
             processStartInfo.UseShellExecute = false;
@@ -39,63 +43,95 @@ namespace DacPac_Exporter
             processStartInfo.StandardErrorEncoding = Encoding.GetEncoding(866);
         }
 
-        private void ExportInPorocess_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Метод инциализирует свойства ProgressBar
+        /// </summary>
+        private void InitializeProgressBarProperty()
         {
-            try
-            {
-                if (!bool.TryParse(ConfigurationManager.AppSettings.Get("Parallel Extraction"), out _parallelExtraction))
-                {
-                    throw new WrongAppSettingValueException("\"Parallel Extraction\"");
-                }
-
-                Thread t = new Thread(new ThreadStart(ExportDB));
-                t.Start();
-
-                MessageBox.Show(new Form { TopMost = true }, "DACPAC Unloading Complete", "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                Logging.WriteToLog(ex.Message);
-                MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Application.Exit();
-            }
+            progressBar.Minimum = 0;
+            progressBar.Maximum = 100;
+            progressBar.Step = 1;
         }
+        #endregion
 
         /// <summary>
         /// Метод отвечает за выгрузку dacpac утилитой SqlPackage.exe
         /// </summary>
-        private void ExportDB()
+        /// <param name="dbName">Имя выгружаемой базы данных</param>
+        private void ExportDB(string dbName)
         {
-            foreach (string dbName in _exportDefinition.DbToExport)
+            string _batch, _output, _command, _text;
+
+            SqlConnectionStringBuilder sqlConnectionString = _exportDefinition.ConnectionString;
+            sqlConnectionString.InitialCatalog = dbName;
+            _batch = $"/a:Extract /SourceConnectionString:\"{sqlConnectionString}\" /TargetFile:\"{_exportDefinition.ExportDirectory}\\{sqlConnectionString.InitialCatalog}.dacpac\"";
+
+            processStartInfo.Arguments = _batch;
+            Process proc = Process.Start(processStartInfo);
+
+            _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
+
+            //Логируем то, что вывелось в консоль
+            if (_isLoggingCommand == true)
             {
-                _exportDefinition.ConnectionString.InitialCatalog = dbName;
-                string _batch = $"/a:Extract /SourceConnectionString:\"{_exportDefinition.ConnectionString.ConnectionString}\" /TargetFile:\"{_exportDefinition.ExportDirectory}\\{_exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
+                _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
+                _text = _command + _output;
+            }
+            else
+            {
+                _text = _output;
+            }
+            Logging.WriteToLog(_text);
+        }
 
-                processStartInfo.Arguments = _batch;
-                Process proc = Process.Start(processStartInfo);
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            backgroundWorker.DoWork -= BackgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
+            backgroundWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
+            backgroundWorker.Dispose();
 
-                _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
+            Hide();
 
-                //Логируем то, что вывелось в консоль
-                if (_isLoggingCommand == true)
-                {
-                    _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
-                    _text = _command + _output;
-                }
-                else
-                {
-                    _text = _output;
-                }
+            if (e.Error == null)
+            {
+                MessageBox.Show(new Form { TopMost = true }, "DACPAC Unloading Complete", "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                Logging.WriteToLog(e.Error.Message);
+                MessageBox.Show(new Form { TopMost = true }, e.Error.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                Logging.WriteToLog(_text);
+            Application.Exit();
+        }
 
-                if (_parallelExtraction == false)
-                    proc.WaitForExit();
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+            lblReportAboutCount.Text = $"Прогресс выполнения {e.ProgressPercentage.ToString()}%";
+        }
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int counter = 0;
+
+            foreach (string dbname in _exportDefinition.DbToExport)
+            {
+                ExportDB(dbname);
+                int percent = Convert.ToInt32((Convert.ToDouble(++counter) / Convert.ToDouble(_exportDefinition.DbToExport.Count) * 100.0));
+                backgroundWorker.ReportProgress(percent);
             }
         }
 
+        private void ExportInProgress_Shown(object sender, EventArgs e)
+        {
+            return;
+        }
+
+        private void ExportInProcess_Load(object sender, EventArgs e)
+        {
+            backgroundWorker.RunWorkerAsync();
+        }
     }
 }

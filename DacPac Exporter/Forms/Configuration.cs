@@ -48,8 +48,8 @@ namespace DacPac_Exporter
             CloseConnection();
 
             ExportInProcess exportInProcess = new ExportInProcess(_exportDefinition);
-            Hide();
             exportInProcess.Show();
+            Hide();
         }
 
         private void CloseConnection()
