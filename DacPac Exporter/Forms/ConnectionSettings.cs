@@ -30,23 +30,17 @@ namespace DacPac_Exporter
         {
             try
             {
-                if (_authentificationType == "SQL Server Authentification")
+                if (AppConfiguration.GetAppConfigSetting("Debug") == true)
+                {
+                    _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                }
+                else if (_authentificationType == "SQL Server Authentification")
                 {
                     _connectionString = $"Data Source={_server};Initial Catalog=master;User ID={_login};Password={_password}";
                 }
                 else
                 {
                     _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
-                }
-
-                if (!bool.TryParse(ConfigurationManager.AppSettings.Get("Debug"), out _debug))
-                {
-                    throw new WrongAppSettingValueException("\"Debug\"");
-                }
-
-                if (_debug == true)
-                {
-                    _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 }
 
                 connection = new SqlConnection(_connectionString);

@@ -1,19 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace DacPac_Exporter
 {
     public partial class ExportInProcess : Form
     {
-        private bool _isLoggingCommand = false;
-        private bool _parallelExtraction = false;
-
         private ExportDefinition _exportDefinition;
         private ProcessStartInfo processStartInfo;
 
@@ -23,8 +18,6 @@ namespace DacPac_Exporter
             InitializeComponent();
             InitializeProcessStartInfo();
             InitializeProgressBarProperty();
-            //lblReportAboutCount.Visible = true;
-            //lblReportAboutCount.Text = "Выгрузка...";
         }
 
         #region Инициализаторы
@@ -72,7 +65,7 @@ namespace DacPac_Exporter
             _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
 
             //Логируем то, что вывелось в консоль
-            if (_isLoggingCommand == true)
+            if (AppConfiguration.GetAppConfigSetting("Debug") == true)
             {
                 _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
                 _text = _command + _output;
@@ -122,11 +115,6 @@ namespace DacPac_Exporter
                 int percent = Convert.ToInt32((Convert.ToDouble(++counter) / Convert.ToDouble(_exportDefinition.DbToExport.Count) * 100.0));
                 backgroundWorker.ReportProgress(percent);
             }
-        }
-
-        private void ExportInProgress_Shown(object sender, EventArgs e)
-        {
-            return;
         }
 
         private void ExportInProcess_Load(object sender, EventArgs e)

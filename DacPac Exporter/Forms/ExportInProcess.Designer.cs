@@ -73,7 +73,6 @@
             this.Text = "ExportInProcess";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ExportInProcess_Load);
-            this.Shown += new System.EventHandler(this.ExportInProgress_Shown);
             this.ResumeLayout(false);
 
         }

@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\AppConfiguration.cs" />
     <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
