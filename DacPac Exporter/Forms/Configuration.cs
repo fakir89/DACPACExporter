@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Configuration;
-using System.IO;
-using System.Text;
-using System.Threading;
 
 namespace DacPac_Exporter
 {
@@ -37,9 +31,9 @@ namespace DacPac_Exporter
         private void FilePathSelectButton_Click(object sender, EventArgs e)
         {
             ExportButton.Focus();
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                _exportDefinition.ExportDirectory = folderBrowserDialog1.SelectedPath;
+                _exportDefinition.ExportDirectory = folderBrowserDialog.SelectedPath;
             }
         }
 

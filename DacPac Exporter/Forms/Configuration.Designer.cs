@@ -33,7 +33,7 @@ namespace DacPac_Exporter
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configuration));
             this.DatabaseSelectButton = new System.Windows.Forms.Button();
             this.FilePathSelectButton = new System.Windows.Forms.Button();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -92,7 +92,7 @@ namespace DacPac_Exporter
 #endregion
         private System.Windows.Forms.Button FilePathSelectButton;
         private System.Windows.Forms.Button DatabaseSelectButton;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Button ExportButton;
     }
 }

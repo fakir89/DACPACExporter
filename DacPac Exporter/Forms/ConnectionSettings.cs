@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Configuration;
 using System.Data;
 
 namespace DacPac_Exporter
@@ -18,7 +17,6 @@ namespace DacPac_Exporter
         private string _login;
         private string _password;
         private string _connectionString;
-        private bool _debug = false;
         private SqlConnection connection;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
