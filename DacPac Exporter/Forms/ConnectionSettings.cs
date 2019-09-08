@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Configuration;
 using System.Data;
 
 namespace DacPac_Exporter
 {
     public partial class ConnectionSettingsForm : Form
     {
-
         public ConnectionSettingsForm()
         {
             InitializeComponent();
         }
         
-        string _server;
-        string _authentificationType;
-        string _login;
-        string _password;
-        string _connectionString;
-        bool _debug = false;
-        SqlConnection connection;
-
-        Logging log = new Logging();
+        private string _server;
+        private string _authentificationType;
+        private string _login;
+        private string _password = null;
+        private string _connectionString;
+        private SqlConnection connection;
+        private ExportDefinition exportDefinition;
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -33,7 +29,11 @@ namespace DacPac_Exporter
         {
             try
             {
-                if (_authentificationType == "SQL Server Authentification")
+                if (AppConfiguration.GetAppConfigSetting("Debug") == true)
+                {
+                    _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                }
+                else if (_authentificationType == "SQL Server Authentification")
                 {
                     _connectionString = $"Data Source={_server};Initial Catalog=master;User ID={_login};Password={_password}";
                 }
@@ -42,25 +42,20 @@ namespace DacPac_Exporter
                     _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
                 }
 
-                if (!bool.TryParse(ConfigurationManager.AppSettings.Get("Debug"), out _debug))
-                {
-                    throw new WrongAppSettingValueException("\"Debug\"");
-                }
-
-                if (_debug == true)
-                {
-                    _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                }
-
                 connection = new SqlConnection(_connectionString);
-
                 connection.Open();
                 Hide();
 
-                Configuration configurationForm = new Configuration();
-                configurationForm.connection = connection;
-                configurationForm.password = _password;
+                if (_password != null)
+                {
+                    exportDefinition = new ExportDefinition(connection, _password);
+                }
+                else
+                {
+                    exportDefinition = new ExportDefinition(connection);
+                }
 
+                Configuration configurationForm = new Configuration(exportDefinition);
                 configurationForm.Show();
 
             }
@@ -69,8 +64,9 @@ namespace DacPac_Exporter
                 CloseConnection();
 
                 //Логируем ошибки
-                log.WriteToLog(ex.Message);
+                Logging.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 

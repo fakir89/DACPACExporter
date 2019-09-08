@@ -1,4 +1,6 @@
-﻿namespace DacPac_Exporter
+﻿using System;
+
+namespace DacPac_Exporter
 {
     partial class Configuration
     {
@@ -31,7 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configuration));
             this.DatabaseSelectButton = new System.Windows.Forms.Button();
             this.FilePathSelectButton = new System.Windows.Forms.Button();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -76,22 +78,20 @@
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.FilePathSelectButton);
             this.Controls.Add(this.DatabaseSelectButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Configuration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DACPAC Exporter";
-            this.Load += new System.EventHandler(this.ConfigurationForm_Load);
             this.ResumeLayout(false);
 
         }
 
-        #endregion
+#endregion
         private System.Windows.Forms.Button FilePathSelectButton;
         private System.Windows.Forms.Button DatabaseSelectButton;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Button ExportButton;
     }
 }

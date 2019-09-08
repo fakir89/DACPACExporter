@@ -7,22 +7,12 @@ namespace DacPac_Exporter
 {
     public partial class DatabaseSelect : Form
     {
-        public string[] checkedDB = new string[1000];
-        int j = 0;
+        private ExportDefinition _exportDefinition;
 
-        SqlConnection _connection;
-
-        public SqlConnection connection
-        {
-            set
-            {
-                _connection = value;
-            }
-        }
-
-        public DatabaseSelect()
+        public DatabaseSelect(ExportDefinition ed)
         {
             InitializeComponent();
+            _exportDefinition = ed;
         }
 
         private void DatabaseSelect_Load(object sender, EventArgs e)
@@ -33,17 +23,19 @@ namespace DacPac_Exporter
         private void DatabaseSelectOKButton_Click(object sender, EventArgs e)
         {
             GetChecked();
+            ((Configuration)Application.OpenForms[1]).Show();
             Hide();
-            Application.OpenForms[1].Show();
         }
 
-        //Метод получает список баз данных и выводит их в checkbox на форме
-        void FillCheckBoxListDatabaseName()
+        /// <summary>
+        /// Метод получает список баз данных и выводит их в checkbox на форме
+        /// </summary>
+        private void FillCheckBoxListDatabaseName()
         {
-            if (_connection != null)
+            if (_exportDefinition.Connection != null)
             {
                 string command = "select name as database_name from sys.databases where state = 0 and name not in ('master', 'tempdb', 'model', 'msdb', 'ssisdb', 'reportserver', 'ReportServerTempDB', 'mscrm_config')";
-                SqlDataAdapter adapter = new SqlDataAdapter(command, _connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command, _exportDefinition.Connection);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
@@ -54,14 +46,16 @@ namespace DacPac_Exporter
             }
         }
 
-        //Метод получает отмеченные в checkbox значения и сохраняет в массив
-        void GetChecked()
+        /// <summary>
+        /// Метод получает отмеченные в checkbox значения и сохраняет в коллекцию
+        /// </summary>
+        private void GetChecked()
         {
             for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)
             {
                 if (CheckBoxListDatabaseName.GetItemChecked(i))
                 {
-                    checkedDB[j++] = CheckBoxListDatabaseName.Items[i].ToString();
+                    _exportDefinition.DbToExport.Add(CheckBoxListDatabaseName.Items[i].ToString());
                 }
             }
         }
