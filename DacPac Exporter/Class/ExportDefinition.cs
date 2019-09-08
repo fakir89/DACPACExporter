@@ -45,6 +45,7 @@ namespace DacPac_Exporter
         {
             Connection = connection;
             ConnectionString = new SqlConnectionStringBuilder(connection.ConnectionString);
+            DbToExport = new List<string>();
         }
     }
 }

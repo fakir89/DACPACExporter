@@ -49,6 +49,7 @@ namespace DacPac_Exporter
                     _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 }
 
+                connection = new SqlConnection(_connectionString);
                 connection.Open();
                 Hide();
 

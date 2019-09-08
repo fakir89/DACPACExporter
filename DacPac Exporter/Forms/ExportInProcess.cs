@@ -30,7 +30,7 @@ namespace DacPac_Exporter
             InitializeComponent();
             _exportDefinition = ed;
             processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = Application.StartupPath + "\\SqlPackage\\SqlPackage.exe";
+            processStartInfo.FileName = Application.StartupPath + @"\Resources\SqlPackage\SqlPackage.exe";
             processStartInfo.UseShellExecute = false;
             processStartInfo.CreateNoWindow = true;
             processStartInfo.RedirectStandardOutput = true;
