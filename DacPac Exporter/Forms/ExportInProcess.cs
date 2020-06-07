@@ -67,9 +67,14 @@ namespace DacPac_Exporter
             _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
 
             //Логируем то, что вывелось в консоль
-            if (AppConfiguration.GetAppConfigSetting("LogCommand") == true)
+            if (AppConfiguration.GetAppConfigSetting("LogCommand"))
             {
-                _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " + _batch + Environment.NewLine + Environment.NewLine;
+                string _password = _exportDefinition.ConnectionString.Password;
+
+                _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " 
+                    + _batch.Replace($"{_password}", $"{new String('*', _password.Length)}")
+                    + Environment.NewLine + Environment.NewLine;
+
                 _text = _command + _output;
             }
             else
