@@ -1,14 +1,18 @@
-﻿using System.Configuration;
+﻿using DacPacExporter.Exceptions;
+using System.Configuration;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Classes
 {
+    /// <summary>
+    /// Конфигурация приложения.
+    /// </summary>
     internal static class AppConfiguration
     {
         /// <summary>
-        /// Метод возвращает значение соответствующего ключа из AppConfig
+        /// Получает значение соответствующего ключа из AppConfig.
         /// </summary>
-        /// <param name="appConfigKey">Имя ключа</param>
-        /// <returns></returns>
+        /// <param name="appConfigKey">Имя ключа.</param>
+        /// <returns>Значение ключа.</returns>
         public static bool GetAppConfigSetting(string appConfigKey)
         {
             bool appConfigValue;

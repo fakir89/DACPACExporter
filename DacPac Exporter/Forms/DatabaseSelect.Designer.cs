@@ -1,5 +1,8 @@
-﻿namespace DacPac_Exporter
+﻿namespace DacPacExporter.Forms
 {
+    /// <summary>
+    /// Форма "Выбор баз данных".
+    /// </summary>
     partial class DatabaseSelect
     {
         /// <summary>

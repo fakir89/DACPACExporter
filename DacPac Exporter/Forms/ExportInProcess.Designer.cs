@@ -1,4 +1,4 @@
-﻿namespace DacPac_Exporter
+﻿namespace DacPacExporter.Forms
 {
     partial class ExportInProcess
     {

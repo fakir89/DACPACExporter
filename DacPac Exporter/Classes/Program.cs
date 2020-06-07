@@ -1,23 +1,23 @@
-﻿using System;
+﻿using DacPacExporter.Forms;
+using System;
 using System.Windows.Forms;
-using System.Configuration;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Classes
 {
-    static class Program
+    /// <summary>
+    /// Точка входа для приложения.
+    /// </summary>
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ConnectionSettingsForm());
         }
     }
-
-
-
 }

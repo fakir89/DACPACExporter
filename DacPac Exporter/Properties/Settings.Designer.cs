@@ -8,19 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DacPac_Exporter.Properties {
-    
+namespace DacPacExporter.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+
+#pragma warning disable CS1591
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
+
+        /// <inheritdoc/>
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
     }
+#pragma warning disable CS1591
+
 }

@@ -1,58 +1,67 @@
-﻿using System;
+﻿using DacPacExporter.Classes;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Forms
 {
+    /// <summary>
+    /// Конфигурация приложения.
+    /// </summary>
     public partial class Configuration : Form
     {
+        private readonly ExportDefinition exportDefinition;
         private DatabaseSelect databaseSelect;
-        private ExportDefinition _exportDefinition;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Configuration"/>.
+        /// </summary>
+        /// <param name="ed">Параметры экспорта.</param>
         public Configuration(ExportDefinition ed)
         {
-            InitializeComponent();
-            _exportDefinition = ed;
-            databaseSelect = new DatabaseSelect(ed);
+            this.InitializeComponent();
+            this.exportDefinition = ed;
+            this.databaseSelect = new DatabaseSelect(ed);
         }
 
         private void ConfigurationForm_Close(object sender, EventArgs e)
         {
-            CloseConnection();
+            this.CloseConnection();
         }
 
         private void DatabaseSelectButton_Click(object sender, EventArgs e)
         {
-            FilePathSelectButton.Focus();
-            databaseSelect.Show();
-            Hide();
+            this.FilePathSelectButton.Focus();
+            this.databaseSelect.Show();
+            this.Hide();
         }
 
         private void FilePathSelectButton_Click(object sender, EventArgs e)
         {
-            ExportButton.Focus();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            this.ExportButton.Focus();
+
+            if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                _exportDefinition.ExportDirectory = folderBrowserDialog.SelectedPath;
+                this.exportDefinition.ExportDirectory = this.folderBrowserDialog.SelectedPath;
             }
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            CloseConnection();
+            this.CloseConnection();
 
-            ExportInProcess exportInProcess = new ExportInProcess(_exportDefinition);
+            ExportInProcess exportInProcess = new ExportInProcess(this.exportDefinition);
             exportInProcess.Show();
-            Hide();
+            this.Hide();
         }
 
         private void CloseConnection()
         {
-            //Если соединение не закрыто, то закрываем его
-            if (_exportDefinition.Connection.State != ConnectionState.Broken
-                || _exportDefinition.Connection.State != ConnectionState.Closed)
+            // Если соединение не закрыто, то закрываем его
+            if (this.exportDefinition.Connection.State != ConnectionState.Broken
+                || this.exportDefinition.Connection.State != ConnectionState.Closed)
             {
-                _exportDefinition.Connection.Close();
+                this.exportDefinition.Connection.Close();
             }
         }
     }

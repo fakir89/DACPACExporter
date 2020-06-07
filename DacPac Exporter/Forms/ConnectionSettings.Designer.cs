@@ -1,5 +1,8 @@
-﻿namespace DacPac_Exporter
+﻿namespace DacPacExporter.Forms
 {
+    /// <summary>
+    /// Форма "Настройки подключения".
+    /// </summary>
     partial class ConnectionSettingsForm
     {
         /// <summary>

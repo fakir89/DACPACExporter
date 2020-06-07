@@ -1,61 +1,66 @@
-﻿using System;
+﻿using DacPacExporter.Classes;
+using System;
 using System.Data;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Forms
 {
     public partial class DatabaseSelect : Form
     {
-        private ExportDefinition _exportDefinition;
+        private readonly ExportDefinition exportDefinition;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="DatabaseSelect"/>.
+        /// </summary>
+        /// <param name="ed">Параметры экспорта.</param>
         public DatabaseSelect(ExportDefinition ed)
         {
-            InitializeComponent();
-            _exportDefinition = ed;
+            this.InitializeComponent();
+            this.exportDefinition = ed;
         }
 
         private void DatabaseSelect_Load(object sender, EventArgs e)
         {
-            FillCheckBoxListDatabaseName();
+            this.FillCheckBoxListDatabaseName();
         }
 
         private void DatabaseSelectOKButton_Click(object sender, EventArgs e)
         {
-            GetChecked();
+            this.GetChecked();
             ((Configuration)Application.OpenForms[1]).Show();
-            Hide();
+            this.Hide();
         }
 
         /// <summary>
-        /// Метод получает список баз данных и выводит их в checkbox на форме
+        /// Метод получает список баз данных и выводит их в checkbox на форме.
         /// </summary>
         private void FillCheckBoxListDatabaseName()
         {
-            if (_exportDefinition.Connection != null)
+            if (this.exportDefinition.Connection != null)
             {
                 string command = "select name as database_name from sys.databases where state = 0 and name not in ('master', 'tempdb', 'model', 'msdb', 'ssisdb', 'reportserver', 'ReportServerTempDB', 'mscrm_config')";
-                SqlDataAdapter adapter = new SqlDataAdapter(command, _exportDefinition.Connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command, this.exportDefinition.Connection);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    CheckBoxListDatabaseName.Items.Add(dt.Rows[i]["database_name"].ToString());
+                    this.CheckBoxListDatabaseName.Items.Add(dt.Rows[i]["database_name"].ToString());
                 }
             }
         }
 
         /// <summary>
-        /// Метод получает отмеченные в checkbox значения и сохраняет в коллекцию
+        /// Получает отмеченные в checkbox значения и сохраняет в коллекцию.
         /// </summary>
         private void GetChecked()
         {
-            for (int i = 0; i < CheckBoxListDatabaseName.Items.Count; i++)
+            for (int i = 0; i < this.CheckBoxListDatabaseName.Items.Count; i++)
             {
-                if (CheckBoxListDatabaseName.GetItemChecked(i))
+                if (this.CheckBoxListDatabaseName.GetItemChecked(i))
                 {
-                    _exportDefinition.DbToExport.Add(CheckBoxListDatabaseName.Items[i].ToString());
+                    this.exportDefinition.DbToExport.Add(this.CheckBoxListDatabaseName.Items[i].ToString());
                 }
             }
         }

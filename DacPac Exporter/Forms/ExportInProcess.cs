@@ -1,97 +1,107 @@
-﻿using System;
+﻿using DacPacExporter.Classes;
+using System;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Forms
 {
+    /// <summary>
+    /// Форма для отображения процесса выгрузки.
+    /// </summary>
     public partial class ExportInProcess : Form
     {
-        private ExportDefinition _exportDefinition;
+        private ExportDefinition exportDefinition;
         private ProcessStartInfo processStartInfo;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="ExportInProcess"/>.
+        /// </summary>
+        /// <param name="ed">Параметры экспорта.</param>
         public ExportInProcess(ExportDefinition ed)
         {
-            _exportDefinition = ed;
-            InitializeComponent();
-            InitializeProcessStartInfo();
-            InitializeProgressBarProperty();
+            this.exportDefinition = ed;
+            this.InitializeComponent();
+            this.InitializeProcessStartInfo();
+            this.InitializeProgressBarProperty();
         }
 
-        #region Инициализаторы
         /// <summary>
-        /// Метод задает параметры запуска фонового процесса 
+        /// Задает параметры запуска фонового процесса.
         /// </summary>
         private void InitializeProcessStartInfo()
         {
-            processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = Application.StartupPath + @"\Resources\SqlPackage\SqlPackage.exe";
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.CreateNoWindow = true;
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
-            processStartInfo.StandardOutputEncoding = Encoding.GetEncoding(866); // 866 - DOS
-            processStartInfo.StandardErrorEncoding = Encoding.GetEncoding(866);
+            this.processStartInfo = new ProcessStartInfo
+            {
+                FileName = Application.StartupPath + @"\Resources\SqlPackage\SqlPackage.exe",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                StandardOutputEncoding = Encoding.GetEncoding(866), // 866 - DOS
+                StandardErrorEncoding = Encoding.GetEncoding(866),
+            };
         }
 
         /// <summary>
-        /// Метод инциализирует свойства ProgressBar
+        /// Метод инциализирует свойства ProgressBar.
         /// </summary>
         private void InitializeProgressBarProperty()
         {
-            progressBar.Minimum = 0;
-            progressBar.Maximum = 100;
-            progressBar.Step = 1;
+            this.progressBar.Minimum = 0;
+            this.progressBar.Maximum = 100;
+            this.progressBar.Step = 1;
         }
-        #endregion
 
         /// <summary>
-        /// Метод отвечает за выгрузку dacpac утилитой SqlPackage.exe
+        /// Выгружает DACPAC утилитой SqlPackage.exe.
         /// </summary>
-        /// <param name="dbName">Имя выгружаемой базы данных</param>
+        /// <param name="dbName">Имя выгружаемой базы данных.</param>
         private void ExportDB(string dbName)
         {
-            if (backgroundWorker.CancellationPending == true)
+            if (this.backgroundWorker.CancellationPending == true)
+            {
                 return;
+            }
 
-            string _batch, _output, _command, _text;
+            string batch, output, command, text;
 
-            _exportDefinition.ConnectionString.InitialCatalog = dbName;
-            _batch = $"/a:Extract /SourceConnectionString:\"{_exportDefinition.ConnectionString}\" /TargetFile:\"{_exportDefinition.ExportDirectory}\\{_exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
+            this.exportDefinition.ConnectionString.InitialCatalog = dbName;
+            batch = $"/a:Extract /SourceConnectionString:\"{this.exportDefinition.ConnectionString}\" /TargetFile:\"{this.exportDefinition.ExportDirectory}\\{this.exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
 
-            processStartInfo.Arguments = _batch;
-            Process proc = Process.Start(processStartInfo);
+            this.processStartInfo.Arguments = batch;
+            Process proc = Process.Start(this.processStartInfo);
 
-            _output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
+            output = "Output: " + proc.StandardOutput.ReadToEnd() + proc.StandardError.ReadToEnd();
 
-            //Логируем то, что вывелось в консоль
+            // Логируем то, что вывелось в консоль.
             if (AppConfiguration.GetAppConfigSetting("LogCommand"))
             {
-                string _password = _exportDefinition.ConnectionString.Password;
+                string password = this.exportDefinition.ConnectionString.Password;
 
-                _command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" " 
-                    + _batch.Replace($"{_password}", $"{new String('*', _password.Length)}")
+                command = "Command: " + Environment.NewLine + "\"" + proc.StartInfo.FileName + "\" "
+                    + batch.Replace($"{password}", $"{new string('*', password.Length)}")
                     + Environment.NewLine + Environment.NewLine;
 
-                _text = _command + _output;
+                text = command + output;
             }
             else
             {
-                _text = _output;
+                text = output;
             }
-            Logging.WriteToLog(_text);
+
+            Logging.WriteToLog(text);
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            backgroundWorker.DoWork -= BackgroundWorker_DoWork;
-            backgroundWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
-            backgroundWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
-            backgroundWorker.Dispose();
+            this.backgroundWorker.DoWork -= this.BackgroundWorker_DoWork;
+            this.backgroundWorker.RunWorkerCompleted -= this.BackgroundWorker_RunWorkerCompleted;
+            this.backgroundWorker.ProgressChanged -= this.BackgroundWorker_ProgressChanged;
+            this.backgroundWorker.Dispose();
 
-            Hide();
+            this.Hide();
 
             if (e.Error == null)
             {
@@ -108,30 +118,30 @@ namespace DacPac_Exporter
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar.Value = e.ProgressPercentage;
-            lblReportAboutCount.Text = $"Progress {e.ProgressPercentage.ToString()}%";
+            this.progressBar.Value = e.ProgressPercentage;
+            this.lblReportAboutCount.Text = $"Progress {e.ProgressPercentage.ToString()}%";
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int counter = 0;
 
-            foreach (string dbname in _exportDefinition.DbToExport)
+            foreach (string dbname in this.exportDefinition.DbToExport)
             {
-                ExportDB(dbname);
-                int percent = Convert.ToInt32((Convert.ToDouble(++counter) / Convert.ToDouble(_exportDefinition.DbToExport.Count) * 100.0));
-                backgroundWorker.ReportProgress(percent);
+                this.ExportDB(dbname);
+                int percent = Convert.ToInt32(Convert.ToDouble(++counter) / Convert.ToDouble(this.exportDefinition.DbToExport.Count) * 100.0);
+                this.backgroundWorker.ReportProgress(percent);
             }
         }
 
         private void ExportInProcess_Load(object sender, EventArgs e)
         {
-            backgroundWorker.RunWorkerAsync();
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         private void ExportInProcess_FormClosing(object sender, FormClosingEventArgs e)
         {
-            backgroundWorker.CancelAsync();
+            this.backgroundWorker.CancelAsync();
         }
     }
 }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9E75A38E-92E4-4AC3-939F-F66EE8C73543}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DacPac_Exporter</RootNamespace>
+    <RootNamespace>DacPacExporter</RootNamespace>
     <AssemblyName>DacPac Exporter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,6 +48,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\DacPac Exporter.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
@@ -71,7 +73,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DacPac_Exporter.Program</StartupObject>
+    <StartupObject>DacPacExporter.Classes.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,7 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\AppConfiguration.cs" />
+    <Compile Include="Classes\AppConfiguration.cs" />
     <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,16 +111,17 @@
     <Compile Include="Forms\ConnectionSettings.Designer.cs">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Exception\WrongAppSettingValueException.cs" />
-    <Compile Include="Class\ExportDefinition.cs" />
+    <Compile Include="Exceptions\WrongAppSettingValueException.cs" />
+    <Compile Include="Classes\ExportDefinition.cs" />
     <Compile Include="Forms\ExportInProcess.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ExportInProcess.Designer.cs">
       <DependentUpon>ExportInProcess.cs</DependentUpon>
     </Compile>
-    <Compile Include="Class\Logging.cs" />
-    <Compile Include="Class\Program.cs" />
+    <Compile Include="Classes\Logging.cs" />
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Interfaces\IExportable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
@@ -145,6 +148,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -155,9 +165,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Resources\SqlPackage\SqlPackage.exe.config">
+    <None Include="Resources\SqlPackage\SqlPackage.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -166,68 +176,71 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <Content Include="Resources\SqlPackage\DacUnpack.exe">
+    <None Include="Resources\SqlPackage\DacUnpack.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Hyak.Common.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Hyak.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.Azure.Common.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.Azure.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.Azure.KeyVault.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.Azure.KeyVault.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.Data.Tools.Schema.Sql.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.Data.Tools.Schema.Sql.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.Data.Tools.Utilities.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.Data.Tools.Utilities.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.xml">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.Extensions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.xml">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Dac.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.xml">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.DacAzureExtensions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.TransactSql.ScriptDom.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.TransactSql.ScriptDom.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.SqlServer.Types.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.SqlServer.Types.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Microsoft.Threading.Tasks.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Microsoft.Threading.Tasks.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\Newtonsoft.Json.dll">
+    </None>
+    <None Include="Resources\SqlPackage\Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\SqlPackage\SqlPackage.exe">
+    </None>
+    <None Include="Resources\SqlPackage\SqlPackage.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

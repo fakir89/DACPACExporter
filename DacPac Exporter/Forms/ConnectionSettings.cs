@@ -1,28 +1,32 @@
-﻿using System;
+﻿using DacPacExporter.Classes;
+using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Data;
 
-namespace DacPac_Exporter
+namespace DacPacExporter.Forms
 {
     public partial class ConnectionSettingsForm : Form
     {
-        public ConnectionSettingsForm()
-        {
-            InitializeComponent();
-        }
-        
-        private string _server;
-        private string _authentificationType;
-        private string _login;
-        private string _password = null;
-        private string _connectionString;
+        private string server;
+        private string authentificationType;
+        private string login;
+        private string password = null;
+        private string connectionString;
         private SqlConnection connection;
         private ExportDefinition exportDefinition;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="ConnectionSettingsForm"/>.
+        /// </summary>
+        public ConnectionSettingsForm()
+        {
+            this.InitializeComponent();
+        }
+
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
-            AuthentificationTypeComboBox.SelectedItem = "Windows Authentification";
+            this.AuthentificationTypeComboBox.SelectedItem = "Windows Authentification";
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
@@ -31,39 +35,38 @@ namespace DacPac_Exporter
             {
                 if (AppConfiguration.GetAppConfigSetting("Debug") == true)
                 {
-                    _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                    this.connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 }
-                else if (_authentificationType == "SQL Server Authentification")
+                else if (this.authentificationType == "SQL Server Authentification")
                 {
-                    _connectionString = $"Data Source={_server};Initial Catalog=master;User ID={_login};Password={_password}";
+                    this.connectionString = $"Data Source={this.server};Initial Catalog=master;User ID={this.login};Password={this.password}";
                 }
                 else
                 {
-                    _connectionString = $"Data Source ={_server}; Initial Catalog = master; Integrated Security = True";
+                    this.connectionString = $"Data Source ={this.server}; Initial Catalog = master; Integrated Security = True";
                 }
 
-                connection = new SqlConnection(_connectionString);
-                connection.Open();
-                Hide();
+                this.connection = new SqlConnection(this.connectionString);
+                this.connection.Open();
+                this.Hide();
 
-                if (_password != null)
+                if (this.password != null)
                 {
-                    exportDefinition = new ExportDefinition(connection, _password);
+                    this.exportDefinition = new ExportDefinition(this.connection, this.password);
                 }
                 else
                 {
-                    exportDefinition = new ExportDefinition(connection);
+                    this.exportDefinition = new ExportDefinition(this.connection);
                 }
 
-                Configuration configurationForm = new Configuration(exportDefinition);
+                Configuration configurationForm = new Configuration(this.exportDefinition);
                 configurationForm.Show();
-
             }
             catch (Exception ex)
             {
-                CloseConnection();
+                this.CloseConnection();
 
-                //Логируем ошибки
+                // Логируем ошибки.
                 Logging.WriteToLog(ex.Message);
                 MessageBox.Show(new Form { TopMost = true }, ex.Message, "DACPAC Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -72,48 +75,48 @@ namespace DacPac_Exporter
 
         private void AuthentificationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _authentificationType = AuthentificationTypeComboBox.SelectedItem.ToString();
+            this.authentificationType = this.AuthentificationTypeComboBox.SelectedItem.ToString();
 
-            if (_authentificationType == "SQL Server Authentification")
+            if (this.authentificationType == "SQL Server Authentification")
             {
-                UserNameLabel.Show();
-                UserNameTextBox.Show();
-                PasswordLabel.Show();
-                PasswordTextBox.Show();
+                this.UserNameLabel.Show();
+                this.UserNameTextBox.Show();
+                this.PasswordLabel.Show();
+                this.PasswordTextBox.Show();
             }
-            else if (_authentificationType == "Windows Authentification")
+            else if (this.authentificationType == "Windows Authentification")
             {
-                UserNameLabel.Hide();
-                UserNameTextBox.Hide();
-                PasswordLabel.Hide();
-                PasswordTextBox.Hide();
+                this.UserNameLabel.Hide();
+                this.UserNameTextBox.Hide();
+                this.PasswordLabel.Hide();
+                this.PasswordTextBox.Hide();
             }
         }
 
         private void ServerNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            _server = ServerNameTextBox.Text;
+            this.server = this.ServerNameTextBox.Text;
         }
 
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            _login = UserNameTextBox.Text;
+            this.login = this.UserNameTextBox.Text;
         }
 
         private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            _password = PasswordTextBox.Text;
+            this.password = this.PasswordTextBox.Text;
         }
 
         private void CloseConnection()
         {
-            if (connection != null)
+            if (this.connection != null)
             {
-                //Если соединение не закрыто, то закрываем его
-                if (connection.State != ConnectionState.Broken
-                    || connection.State != ConnectionState.Closed)
+                // Если соединение не закрыто, то закрываем его.
+                if (this.connection.State != ConnectionState.Broken
+                    || this.connection.State != ConnectionState.Closed)
                 {
-                    connection.Close();
+                    this.connection.Close();
                 }
             }
         }
