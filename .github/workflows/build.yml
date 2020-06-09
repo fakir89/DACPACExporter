@@ -10,8 +10,6 @@ jobs:
       steps:
         - name: Get the sources
           uses: actions/checkout@v1
-        - name: .NetFramework Action Template
-          uses: auycro/netframework-action-template@v0.0.2  
         - name: Setup Nuget.exe
           uses: warrenbuckley/Setup-Nuget@v1        
         - name: Run the build script
