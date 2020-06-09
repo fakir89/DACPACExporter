@@ -1,0 +1,17 @@
+name: Build Develop
+
+on:
+  pull_request:
+  push:
+    branches: [ develop ]
+
+jobs:
+    build:
+      runs-on: windows-latest
+      steps:
+        - name: Get the sources
+          uses: actions/checkout@v1
+        - name: Setup Nuget.exe
+          uses: warrenbuckley/Setup-Nuget@v1        
+        - name: Run the build script
+          uses: cake-build/cake-action@v1.1.1
