@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90788161-B337-49ED-A7F7-00108B9849D6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		build.ps1 = build.ps1
 		stylecop.json = stylecop.json
 		stylecop.ruleset = stylecop.ruleset
 	EndProjectSection
