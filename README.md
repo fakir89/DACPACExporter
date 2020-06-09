@@ -1,1 +1,1 @@
-![master](https://github.com/fakir89/DACPACExporter/workflows/CI/badge.svg?branch=master)
+![Build Master](https://github.com/fakir89/DACPACExporter/workflows/Build%20Master/badge.svg?branch=master)
