@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DacPacExporter.Exceptions
+namespace DacPacExporter.Classes.Exceptions
 {
     /// <summary>
     /// Исключение "Не верное значение настройки приложения".

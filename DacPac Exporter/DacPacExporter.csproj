@@ -111,7 +111,7 @@
     <Compile Include="Forms\ConnectionSettings.Designer.cs">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Exceptions\WrongAppSettingValueException.cs" />
+    <Compile Include="Classes\Exceptions\WrongAppSettingValueException.cs" />
     <Compile Include="Classes\ExportDefinition.cs" />
     <Compile Include="Forms\ExportInProcess.cs">
       <SubType>Form</SubType>
