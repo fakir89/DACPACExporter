@@ -68,7 +68,8 @@ namespace DacPacExporter.Forms
             string batch, output, command, text;
 
             this.exportDefinition.ConnectionString.InitialCatalog = dbName;
-            batch = $"/a:Extract /SourceConnectionString:\"{this.exportDefinition.ConnectionString}\" /TargetFile:\"{this.exportDefinition.ExportDirectory}\\{this.exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
+            batch = $"/a:Extract /SourceConnectionString:\"{this.exportDefinition.ConnectionString}\"" +
+                $" /TargetFile:\"{this.exportDefinition.ExportDirectory}\\{this.exportDefinition.ConnectionString.InitialCatalog}_{DateTime.Now:yyyyMMdd_HHmmssms}.dacpac\"";
 
             this.processStartInfo.Arguments = batch;
             Process proc = Process.Start(this.processStartInfo);
