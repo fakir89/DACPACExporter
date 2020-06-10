@@ -18,10 +18,10 @@ namespace DacPacExporter.Forms
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ExportInProcess"/>.
         /// </summary>
-        /// <param name="ed">Параметры экспорта.</param>
-        public ExportInProcess(ExportDefinition ed)
+        /// <param name="exportDefinition">Параметры экспорта.</param>
+        public ExportInProcess(ExportDefinition exportDefinition)
         {
-            this.exportDefinition = ed;
+            this.exportDefinition = exportDefinition;
             this.InitializeComponent();
             this.InitializeProcessStartInfo();
             this.InitializeProgressBarProperty();
@@ -119,12 +119,13 @@ namespace DacPacExporter.Forms
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
-            this.lblReportAboutCount.Text = $"Progress {e.ProgressPercentage.ToString()}%";
+            this.lblReportAboutCount.Text = $"Progress {e.ProgressPercentage}%";
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int counter = 0;
+            this.Text = $"{this.Text} ({this.exportDefinition.ConnectionString.DataSource})";
 
             foreach (string dbname in this.exportDefinition.DbToExport)
             {
