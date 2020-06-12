@@ -95,7 +95,7 @@ namespace DacPacExporter.Forms
 
         private void ServerNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.server = this.ServerNameTextBox.Text;
+            this.server = this.ServerNameComboBox.SelectedText;
         }
 
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
