@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppConfiguration.cs" />
+    <Compile Include="Classes\CachedServerManager.cs" />
     <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
