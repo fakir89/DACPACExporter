@@ -93,11 +93,6 @@ namespace DacPacExporter.Forms
             }
         }
 
-        private void ServerNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            this.server = this.ServerNameComboBox.SelectedText;
-        }
-
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
             this.login = this.UserNameTextBox.Text;
@@ -119,6 +114,11 @@ namespace DacPacExporter.Forms
                     this.connection.Close();
                 }
             }
+        }
+
+        private void ServerNameComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            this.server = this.ServerNameComboBox.Text;
         }
     }
 }
