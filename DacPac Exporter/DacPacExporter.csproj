@@ -180,12 +180,6 @@
     <None Include="Resources\SqlPackage\DacUnpack.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\SqlPackage\Hyak.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\SqlPackage\Microsoft.Azure.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\SqlPackage\Microsoft.Azure.KeyVault.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -226,9 +220,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SqlPackage\Microsoft.SqlServer.Types.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\SqlPackage\Microsoft.Threading.Tasks.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SqlPackage\Newtonsoft.Json.dll">
