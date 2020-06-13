@@ -4,6 +4,8 @@
 
 Application for export SQL Server databases DACPACs. 
 
+## Supported SQL Server versions
+Application supported exporting DACPACs up to SQL Server 2017.
 
 ## How to build
 To build application clone repository, then execute command `./build.ps1` in powershell. After successful build, application executable files will be in `artifacts` folder. 
