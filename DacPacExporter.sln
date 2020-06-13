@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DacPacExporter", "DacPac Exporter\DacPacExporter.csproj", "{9E75A38E-92E4-4AC3-939F-F66EE8C73543}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACPACExporter", "DacPac Exporter\DACPACExporter.csproj", "{9E75A38E-92E4-4AC3-939F-F66EE8C73543}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90788161-B337-49ED-A7F7-00108B9849D6}"
 	ProjectSection(SolutionItems) = preProject

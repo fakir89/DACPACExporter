@@ -18,13 +18,14 @@ namespace DacPacExporter.Forms
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ExportInProcess"/>.
         /// </summary>
-        /// <param name="ed">Параметры экспорта.</param>
-        public ExportInProcess(ExportDefinition ed)
+        /// <param name="exportDefinition">Параметры экспорта.</param>
+        public ExportInProcess(ExportDefinition exportDefinition)
         {
-            this.exportDefinition = ed;
+            this.exportDefinition = exportDefinition;
             this.InitializeComponent();
             this.InitializeProcessStartInfo();
             this.InitializeProgressBarProperty();
+            this.Text = $"{this.Text} ({this.exportDefinition.ConnectionString.DataSource})";
         }
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace DacPacExporter.Forms
             string batch, output, command, text;
 
             this.exportDefinition.ConnectionString.InitialCatalog = dbName;
-            batch = $"/a:Extract /SourceConnectionString:\"{this.exportDefinition.ConnectionString}\" /TargetFile:\"{this.exportDefinition.ExportDirectory}\\{this.exportDefinition.ConnectionString.InitialCatalog}.dacpac\"";
+            batch = $"/a:Extract /SourceConnectionString:\"{this.exportDefinition.ConnectionString}\"" +
+                $" /TargetFile:\"{this.exportDefinition.ExportDirectory}\\{this.exportDefinition.ConnectionString.InitialCatalog}_{DateTime.Now:yyyyMMdd_HHmmssms}.dacpac\"";
 
             this.processStartInfo.Arguments = batch;
             Process proc = Process.Start(this.processStartInfo);
@@ -119,7 +121,7 @@ namespace DacPacExporter.Forms
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
-            this.lblReportAboutCount.Text = $"Progress {e.ProgressPercentage.ToString()}%";
+            this.lblReportAboutCount.Text = $"Progress {e.ProgressPercentage}%";
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)

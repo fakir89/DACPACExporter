@@ -7,7 +7,7 @@
     <ProjectGuid>{9E75A38E-92E4-4AC3-939F-F66EE8C73543}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DacPacExporter</RootNamespace>
-    <AssemblyName>DacPac Exporter</AssemblyName>
+    <AssemblyName>DACPAC Exporter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,7 +49,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\DacPac Exporter.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\DACPAC Exporter.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppConfiguration.cs" />
+    <Compile Include="Classes\CachedServersManager.cs" />
     <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,7 +112,7 @@
     <Compile Include="Forms\ConnectionSettings.Designer.cs">
       <DependentUpon>ConnectionSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Exceptions\WrongAppSettingValueException.cs" />
+    <Compile Include="Classes\Exceptions\WrongAppSettingValueException.cs" />
     <Compile Include="Classes\ExportDefinition.cs" />
     <Compile Include="Forms\ExportInProcess.cs">
       <SubType>Form</SubType>
@@ -156,10 +157,10 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
+    <DesignData Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    </DesignData>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -177,12 +178,6 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <None Include="Resources\SqlPackage\DacUnpack.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\SqlPackage\Hyak.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\SqlPackage\Microsoft.Azure.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SqlPackage\Microsoft.Azure.KeyVault.dll">
@@ -225,9 +220,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SqlPackage\Microsoft.SqlServer.Types.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\SqlPackage\Microsoft.Threading.Tasks.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SqlPackage\Newtonsoft.Json.dll">

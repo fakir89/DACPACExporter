@@ -10,21 +10,28 @@
 
 namespace DacPacExporter.Properties {
     
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
-
-#pragma warning disable CS1591
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        /// <inheritdoc/>
+        
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection CachedServers {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CachedServers"]));
+            }
+            set {
+                this["CachedServers"] = value;
+            }
+        }
     }
-#pragma warning disable CS1591
-
 }

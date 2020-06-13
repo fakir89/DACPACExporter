@@ -23,7 +23,7 @@ Task("Build")
 .IsDependentOn("NuGet-Restore")
 .Does(() =>
 {
-    DotNetBuild(solutionName, x => x
+    MSBuild(solutionName, x => x
         .SetConfiguration(configuration)
         .SetVerbosity(Verbosity.Minimal)
         .WithTarget("build")
