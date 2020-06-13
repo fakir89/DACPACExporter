@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppConfiguration.cs" />
-    <Compile Include="Classes\CachedServerManager.cs" />
+    <Compile Include="Classes\CachedServersManager.cs" />
     <Compile Include="Forms\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,10 +157,10 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
+    <DesignData Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    </DesignData>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

@@ -1,5 +1,7 @@
 ﻿using DacPacExporter.Classes;
+using DacPacExporter.Properties;
 using System;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -8,6 +10,7 @@ namespace DacPacExporter.Forms
 {
     public partial class ConnectionSettingsForm : Form
     {
+        private readonly CachedServersManager cachedServersManager;
         private string server;
         private string authentificationType;
         private string login;
@@ -22,11 +25,19 @@ namespace DacPacExporter.Forms
         public ConnectionSettingsForm()
         {
             this.InitializeComponent();
+            this.cachedServersManager = CachedServersManager.GetInstance();
         }
 
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
             this.AuthentificationTypeComboBox.SelectedItem = "Windows Authentification";
+
+            string[] items = this.cachedServersManager.Get();
+            if (items.Length > 0)
+            {
+                this.ServerNameComboBox.Items.AddRange(items);
+                this.ServerNameComboBox.SelectedIndex = 0;
+            }
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
@@ -61,6 +72,8 @@ namespace DacPacExporter.Forms
 
                 Configuration configurationForm = new Configuration(this.exportDefinition);
                 configurationForm.Show();
+
+                this.cachedServersManager.Save(this.server);
             }
             catch (Exception ex)
             {
@@ -117,6 +130,11 @@ namespace DacPacExporter.Forms
         }
 
         private void ServerNameComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            this.server = this.ServerNameComboBox.Text;
+        }
+
+        private void ServerNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.server = this.ServerNameComboBox.Text;
         }

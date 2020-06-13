@@ -161,6 +161,7 @@
             this.ServerNameComboBox.Name = "ServerNameComboBox";
             this.ServerNameComboBox.Size = new System.Drawing.Size(219, 24);
             this.ServerNameComboBox.TabIndex = 1;
+            this.ServerNameComboBox.SelectedIndexChanged += new System.EventHandler(this.ServerNameComboBox_SelectedIndexChanged);
             this.ServerNameComboBox.TextUpdate += new System.EventHandler(this.ServerNameComboBox_TextUpdate);
             // 
             // ConnectionSettingsForm

@@ -25,6 +25,7 @@ namespace DacPacExporter.Forms
             this.InitializeComponent();
             this.InitializeProcessStartInfo();
             this.InitializeProgressBarProperty();
+            this.Text = $"{this.Text} ({this.exportDefinition.ConnectionString.DataSource})";
         }
 
         /// <summary>
@@ -126,7 +127,6 @@ namespace DacPacExporter.Forms
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int counter = 0;
-            this.Text = $"{this.Text} ({this.exportDefinition.ConnectionString.DataSource})";
 
             foreach (string dbname in this.exportDefinition.DbToExport)
             {
